@@ -1,0 +1,15 @@
+Spring Security是一个基于Spring框架的安全框架，提供了完整的安全解决方案。通过token鉴别身份。
+- 认证：提供了多种认证方式，如表单认证、HTTP Basic认证、OAuth2认证等，可以与多种身份验证机制集成。
+- 授权：提供了多种授权方式，如角色授权、基于表达式的授权等，可以对应用程序中的不同资源进行授权。
+
+Spring Security的核心原理是拦截器（Filter）。Spring Security会在Web应用程序的过滤器链中添加一组自定义的过滤器，这些过滤器可以实现身份验证和授权功能。当用户请求资源时，Spring Security会拦截请求，并使用配置的身份验证机制来验证用户身份。如果身份验证成功，Spring Security会授权用户访问所请求的资源。
+
+# 表单登录的过程
+1. 用户在登录页面输入用户名和密码，提交表单。
+2. Spring Security的UsernamePasswordAuthenticationFilter拦截表单提交的请求，并将用户名和密码封装成一个Authentication对象。
+3. AuthenticationManager接收到Authentication对象后，会根据用户名和密码查询用户信息，并将用户信息封装成一个UserDetails对象。
+4. 如果查询到用户信息，则将UserDetails对象封装成一个已认证的Authentication对象并返回，如果查询不到用户信息，则抛出相应的异常。
+5. 认证成功后，用户会被重定向到之前访问的资源。如果之前访问的资源需要特定的角色或权限才能访问，则还需要进行授权的过程。
+Spring Security的认证流程大致可以分为两个过程，首先是用户登录认证的过程，然后是用户访问受保护资源时的授权过程。
+
+在认证过程中，用户需要提供用户名和密码，Spring Security通过UsernamePasswordAuthenticationFilter将用户名和密码封装成Authentication对象，并交由AuthenticationManager进行认证。如果认证成功，则认证结果会存储在SecurityContextHolder中。在授权过程中，Spring Security会检查用户是否有访问受保护资源的权限，如果没有则会重定向到登录页面进行认证。

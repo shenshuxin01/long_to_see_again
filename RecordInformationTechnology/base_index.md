@@ -22,6 +22,7 @@
 
 # oracle
 - [sql语法](./detail_files/oracle/oracle-learn.md#sql语法)
+- [sql优化](./detail_files/oracle/oracle-learn.md#sql优化)
 
 # ETL
 - [informatica](./detail_files/ETL/etl-learn.md#informatica)
@@ -60,6 +61,11 @@
 # vue
 - [vue基础](./detail_files/vue/vue-learn.md#vue基础)
 
+# spring boot
+- [springboot-bean生命周期](./detail_files/spring-boot/springboot-learn.md#springboot-bean生命周期)
+- [springboot自动配置的原理](./detail_files/spring-boot/springboot-learn.md#springboot自动配置的原理)
+- [springboot启动流程](./detail_files/spring-boot/springboot-learn.md#springboot启动流程)
+
 # spring cloud
 - [服务注册发现](./detail_files/spring-cloud/springcloud-learn.md#服务注册发现)
 - [远程配置中心](./detail_files/spring-cloud/springcloud-learn.md#远程配置中心)
@@ -72,22 +78,27 @@
 - [tcp三次握手](./detail_files/https/tcp-learn.md#tcp三次握手)
 - [tcp四次挥手](./detail_files/https/tcp-learn.md#tcp四次挥手)
 
-# vue
-- [vue基础](./detail_files/vue/vue-learn.md#vue基础)
+# redis
+- [redis数据类型及操作命令](./detail_files/redis/redis-learn.md#redis数据类型及操作命令)
+- [持久化方式](./detail_files/redis/redis-learn.md#持久化方式)
 
-# vue
-- [vue基础](./detail_files/vue/vue-learn.md#vue基础)
+# dubbo
+- [dubbo](./detail_files/dubbo/dubbo-learn.md)
 
+# gRPC
+- [gRPC](./detail_files/gRPC/grpc-learn.md)
 
-# vue
-- [vue基础](./detail_files/vue/vue-learn.md#vue基础)
+# spring security
+- [spring security](./detail_files/spring-security/springsecurity-learn.md)
 
-# vue
-- [vue基础](./detail_files/vue/vue-learn.md#vue基础)
-# vue
-- [vue基础](./detail_files/vue/vue-learn.md#vue基础)
-# vue
-- [vue基础](./detail_files/vue/vue-learn.md#vue基础)
+# seata
+- [at模式](./detail_files/seata/seata-learn.md#at模式)
+- [tcc模式](./detail_files/seata/seata-learn.md#tcc模式)
+
+# 分布式锁
+- [zookeeper锁](./detail_files/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/cloudlock-learn.md#zookeeper锁)
+- [redis锁](./detail_files/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/cloudlock-learn.md#redis锁)
+
 # vue
 - [vue基础](./detail_files/vue/vue-learn.md#vue基础)
 # vue
