@@ -15,7 +15,7 @@ angular、、、
 
 
 最新记录it：
-先处理万德里，然后打开csdn按照时间顺序把笔记保存到此处，然后是github、gitee、mybase
+先处理万德里，然后打开csdn按照时间顺序把笔记保存到此处，然后是github、gitee、mybase、联想小新电脑的OneDrive学习资料
 
 
 后续

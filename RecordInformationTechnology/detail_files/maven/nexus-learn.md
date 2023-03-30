@@ -1,0 +1,9 @@
+nexus是一个强大的maven仓库管理器,它极大的简化了本地内部仓库的维护和外部仓库的访问.
+
+nexus是一套开箱即用的系统不需要数据库,它使用文件系统加Lucene来组织数据
+
+nexus使用ExtJS来开发界面,利用Restlet来提供完整的REST APIs,通过IDEA和Eclipse集成使用
+
+nexus支持webDAV与LDAP安全身份认证.
+
+nexus提供了强大的仓库管理功能,构件搜索功能,它基于REST,友好的UI是一个extjs的REST客户端,占用较少的内存,基于简单文件系统而非数据库
