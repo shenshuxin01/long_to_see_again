@@ -77,6 +77,9 @@
 - [请求流程](./detail_files/https/https-learn.md#请求流程)
 - [tcp三次握手](./detail_files/https/tcp-learn.md#tcp三次握手)
 - [tcp四次挥手](./detail_files/https/tcp-learn.md#tcp四次挥手)
+- [nginx部署](./detail_files/https/https-learn.md#nginx部署)
+- [nginx完全指南](./detail_files/https/https-learn.md#nginx完全指南)
+
 
 # redis
 - [redis数据类型及操作命令](./detail_files/redis/redis-learn.md#redis数据类型及操作命令)

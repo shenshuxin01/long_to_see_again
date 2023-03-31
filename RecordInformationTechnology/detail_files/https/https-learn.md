@@ -30,3 +30,39 @@ HTTPS：简单讲是HTTP的安全版，在HTTP下加入SSL层，HTTPS的安全�
 6、服务器接收密文后，会用私钥对其进行非对称解密，得到客户端秘钥。并使用客户端秘钥进行对称加密，生成密文并发送。
 
 7、客户端收到密文，并使用客户端秘钥进行解密，获取数据。
+
+# nginx部署
+1. 下载安装包`http://nginx.org/en/download.html`
+2. 解压`tar -zxvf nginx-1.20.2.tar.gz`
+3. 安装 nginx 的相关依赖`yum -y install gcc zlib zlib-devel pcre-devel openssl openssl-devel`
+4. 生成 Makefile`./configure --with-http_ssl_module`
+5. 编译`make`
+6. 安装`make install`
+7. 删除解压的文件夹（第二步的），编译后此文件就不用了
+7. 进入`/usr/local/nginx/sbin`运行
+
+# nginx完全指南
+![官方nginx完全指南](./NGINX%20Cookbook%202E%20Simplified%20Chinese%20Edition_CN.pdf)
+
+# acmesh方式部署https
+前提条件：
+- acmesh官网：https://github.com/acmesh-official/acme.sh/wiki/%E8%AF%B4%E6%98%8E
+- 已有http网站并且是nginx部署的
+
+因为官网有中文的安装文档，下面是记录具体的执行步骤
+```sh
+cd apps/acmesh
+
+# 下载安装
+curl https://get.acme.sh | sh -s email=ssx17852015601@163.com
+# 成功会打印 [Fri Mar 31 10:26:32 CST 2023] Install success!
+
+cd ~/.acme.sh/
+
+alias acme.sh=~/.acme.sh/acme.sh
+
+#配置下nginx的环境变量 vim ~/.bash_profile +$PATH
+
+acme.sh --issue -d shenshuxin.tpddns.cn --nginx /usr/local/nginx/conf/nginx.conf
+
+```
