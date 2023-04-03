@@ -1,9 +1,10 @@
 
-- 建议使用vscode打开此工程
-- 跳转的链接都是 `[链接名字](文件路径#L14)` 表示对应文件的第14行,如果是md格式的则建议使用#标题
-- 按照时间线顺序来记录created shenshuxin 20230328
-- 持续更新中，同时发布到[csdn](https://blog.csdn.net/weixin_48835367?type=blog)
+- *建议使用vscode打开此工程*
+- *跳转的链接都是 `[链接名字](文件路径#L14)` 表示对应文件的第14行,如果是md格式的则建议使用#标题*
+- *按照时间线顺序来记录created shenshuxin 20230328*
+- *持续更新中，同时发布到[csdn](https://blog.csdn.net/weixin_48835367?type=blog)*
 ---
+<br>
 
 # 面试IT
 - [自我介绍](./detail_files/%E9%9D%A2%E8%AF%95/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D.md)
