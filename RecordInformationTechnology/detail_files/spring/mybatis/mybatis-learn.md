@@ -18,6 +18,7 @@ ORM（Object/Relational Mapping）即对象关系映射，是一种数据持久�
 1. 自定义实体类 数据库映射对象
 2. 创建Mapper注解接口继承 BaseMapper<实体类>。此接口有curd方法
 3. 逻辑代码中操作mapper对象即可
+
 ![mybatis-plus使用](./1680158798660.jpg)
 
 
