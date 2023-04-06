@@ -45,11 +45,14 @@ HTTPS：简单讲是HTTP的安全版，在HTTP下加入SSL层，HTTPS的安全�
 ![官方nginx完全指南](./NGINX%20Cookbook%202E%20Simplified%20Chinese%20Edition_CN.pdf)
 
 # acmesh方式部署https
-前提条件：
+## 1. 前提条件
 - acmesh官网：https://github.com/acmesh-official/acme.sh/wiki/%E8%AF%B4%E6%98%8E
 - 已有http网站并且是nginx部署的
 
-因为官网有中文的安装文档，下面是记录具体的执行步骤
+## 2. 原理
+先验证域名的所有权，验证成功之后直接安装证书。
+
+## 3. 因为官网有中文的安装文档，下面是记录具体的执行步骤
 ```sh
 cd apps/acmesh
 
@@ -63,6 +66,29 @@ alias acme.sh=~/.acme.sh/acme.sh
 
 #配置下nginx的环境变量 vim ~/.bash_profile +$PATH
 
+# 认证域名所有权
 acme.sh --issue -d shenshuxin.tpddns.cn --nginx /usr/local/nginx/conf/nginx.conf
 
+# 下发证书 安装 证书
+acme.sh --install-cert -d example.com \
+--key-file       /path/to/keyfile/in/nginx/key.pem  \
+--fullchain-file /path/to/fullchain/nginx/cert.pem \
+--reloadcmd     "service nginx force-reload"
 ```
+## 4. 遇到的问题
+1. 因为我的ip不支持80、443端口访问，所以验证整数的时候不行，因为验证证书仅仅支持80端口
+2. 验证域名的所有权可以http方式可以dns方式，因为http我没有80端口号，但是dns方式我的域名是腾达路由器的免费二级域名，也不支持dns添加txt。所以不能进行域名所有权验证。
+3. 解决方案可以给宽带客服打电话开通80端口访问 或者使用花生壳域名支持添加dns的txt
+
+
+
+
+
+
+
+
+
+
+
+
+
