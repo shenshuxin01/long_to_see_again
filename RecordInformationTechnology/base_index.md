@@ -107,7 +107,8 @@
 - [vscode](./detail_files/vscode/vscode-learn.md)
 
 # google插件
-- [插件下载地址](./detail_files/Google%E6%8F%92%E4%BB%B6/google-plugin.md)
+- [插件下载地址](./detail_files/Google%E6%8F%92%E4%BB%B6/google-plugin.md#插件google网址)
+- [高阶bing搜索引擎](./detail_files/Google%E6%8F%92%E4%BB%B6/google-plugin.md#高阶bing搜索引擎)
 
 
 # untitled
