@@ -58,6 +58,7 @@
 
 # angular
 - [ng基础](./detail_files/angular/angular-learn.md#ng基础)
+- [html转义符](./detail_files/angular/angular-learn.md#html转义符)
 
 # vue
 - [vue基础](./detail_files/vue/vue-learn.md#vue基础)
