@@ -1,1 +1,29 @@
+[root@node101 ~]# kubectl get deployments.apps -n ssx
+NAME                                      READY   UP-TO-DATE   AVAILABLE   AGE 
+ssx-elk-dm                                0/1     1            0           76d 
+ssx-java-developer-function-provider-dm   0/2     2            0           267d
+ssx-java-web-dm                           0/1     1            0           274d
+ssx-jenkins-dm                            0/1     1            0           295d
+ssx-kafka-dm                              0/1     1            0           78d 
+ssx-mysql-dm                              0/1     1            0           295d
+ssx-nginx-dm                              0/1     1            0           295d
+ssx-redis-dm                              0/1     1            0           295d
+ssx-sleuth-zipkin-dm                      0/1     1            0           77d 
 
+
+kubectl -n troubleshooting describe pod -n ssx xxxpod
+
+Events:
+  Type     Reason            Age    From               Message
+  ----     ------            ----   ----               -------
+  Warning  FailedScheduling  2m20s  default-scheduler  0/1 nodes are available: 1 node(s) had taint {node.kubernetes.io/disk-pressure: }, that the pod didn't tolerate.
+  Warning  FailedScheduling  57s    default-scheduler  0/1 nodes are available: 1 node(s) had taint {node.kubernetes.io/disk-pressure: }, that the pod didn't tolerate.
+
+
+磁盘不足问题
+disk-pressure
+
+journalctl -xefu kubelet
+
+但是我什么也没做，就是把所有的pod都删除了，没删除deployment 自动重新创建pod
+就好了
