@@ -1,5 +1,6 @@
 # ng基础
 [菜鸟教程angular](https://www.runoob.com/angularjs/angularjs-tutorial.html)
+[angular应用clock小项目](https://github.com/shenshuxin01/shenshuxin01.github.io/tree/master/game/clock)
 
 # html转义符
 `比如，要显示小于号（<），就可以写 &lt; 或者 &#60; `

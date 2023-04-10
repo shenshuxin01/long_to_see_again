@@ -111,12 +111,12 @@
 - [插件下载地址](./detail_files/Google%E6%8F%92%E4%BB%B6/google-plugin.md#插件google网址)
 - [高阶bing搜索引擎](./detail_files/Google%E6%8F%92%E4%BB%B6/google-plugin.md#高阶bing搜索引擎)
 
+# nodeJS
+- [nodejs基础](./detail_files/nodeJS/nodejs-learn.md#nodejs基础)
 
-# untitled
-- [untitled基础](./detail_files/md#基础)
-
-# untitled
-- [untitled基础](./detail_files/md#基础)
+# github Pages
+- [github静态页面](shenshuxin01.github.io/mainLogin/index.html)
+- [github静态页面源代码](https://github.com/shenshuxin01/shenshuxin01.github.io)
 
 # untitled
 - [untitled基础](./detail_files/md#基础)
