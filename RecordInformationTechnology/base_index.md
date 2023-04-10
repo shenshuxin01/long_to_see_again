@@ -15,6 +15,7 @@
 # python基础
 - [基础知识](./detail_files/python/python-learn.md#基础知识)
 - [自定义包setup](./detail_files/python/python-learn.md#自定义包setup)
+- [应用项目2022](./detail_files/python/python-learn.md#应用项目2022)
 
 # java基础
 - [java基础语法](./detail_files/javaSE/java-learn.md#java基础语法)
@@ -62,13 +63,16 @@
 
 # vue
 - [vue基础](./detail_files/vue/vue-learn.md#vue基础)
+- [项目welcome-ssx](./detail_files/vue/vue-learn.md#应用2022年项目welcome-ssx)
 
 # spring boot
 - [springboot-bean生命周期](./detail_files/spring-boot/springboot-learn.md#springboot-bean生命周期)
 - [springboot自动配置的原理](./detail_files/spring-boot/springboot-learn.md#springboot自动配置的原理)
+- [starter机制](./detail_files/spring-boot/springboot-learn.md#starter机制)
 - [springboot启动流程](./detail_files/spring-boot/springboot-learn.md#springboot启动流程)
 
 # spring cloud
+- [项目welcome-ssx](./detail_files/spring-cloud/springcloud-learn.md#应用2022年项目welcome-ssx)
 - [服务注册发现](./detail_files/spring-cloud/springcloud-learn.md#服务注册发现)
 - [远程配置中心](./detail_files/spring-cloud/springcloud-learn.md#远程配置中心)
 - [rpc](./detail_files/spring-cloud/springcloud-learn.md#rpc)
@@ -118,8 +122,8 @@
 - [github静态页面](shenshuxin01.github.io/mainLogin/index.html)
 - [github静态页面源代码](https://github.com/shenshuxin01/shenshuxin01.github.io)
 
-# untitled
-- [untitled基础](./detail_files/md#基础)
+# VCS(git\svn)
+- [java集成svn实现自动更新提交代码](./detail_files/VCS/vcs-learn.md#java集成svn实现自动更新提交代码)
 
 # untitled
 - [untitled基础](./detail_files/md#基础)

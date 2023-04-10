@@ -12,6 +12,8 @@
 
 ![自定义模块使用](1680142025526.jpg)
 
-
+# 应用项目2022
+[gitee](https://gitee.com/shenshuxin01/python-script-202205)
+![1681095966213](image/python-learn/1681095966213.png)
 
 

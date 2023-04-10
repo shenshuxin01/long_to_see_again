@@ -20,6 +20,9 @@ Redis的作者为了解决这个问题提出了一个叫**Redlock**的算法： 
 redis红锁，在集群中的每个节点设置一个锁，注意锁不能重名，因为锁重名会覆盖，整个集群key不可以重复。开始在每个节点加锁，加锁完成后，当前线程开始加锁的时间，和加锁完成的时间，每个锁的剩余时间都要大于加锁完成的时间才行，保证半数以上符合以上条件即可
 此方法效率低，容错率高
 
+- [redis红锁demo源码](https://gitee.com/shenshuxin01/first_-spring-boot_-demo/tree/master/Redisson_RedLock_Demo)
+
+
 # 区别
 众所周知，Redis标榜的是轻量级，直观上分布式锁是比较好实现的，比如使用setnx，但一旦加入高可用这个属性，Redis锁的实现难度就会爆炸式上升。
 Redis，使用redisson封装的RedLock Zk，使用curator封装的InterProcessMutex
