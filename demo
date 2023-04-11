@@ -27,3 +27,5 @@ journalctl -xefu kubelet
 
 但是我什么也没做，就是把所有的pod都删除了，没删除deployment 自动重新创建pod
 就好了
+
+好像是因为磁盘的问题，我的ssh突然消失了 重新配置的
