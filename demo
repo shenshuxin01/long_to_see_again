@@ -26,4 +26,5 @@ disk-pressure
 journalctl -xefu kubelet
 
 但是我什么也没做，就是把所有的pod都删除了，没删除deployment 自动重新创建pod
+好奇挂，20230410 先记录下来吧
 就好了
