@@ -11,3 +11,24 @@
 7. like避免左模糊查询
 8. 多多使用表连接 最好是内连接
 
+# mysql too many connections 解决方法
+```sql
+-- 查看最大连接数
+show variables like '%max_connections%';
+
+-- 查看实时连接数
+show global status like 'Max_used_connections';
+
+-- 这个数值指的是mysql在关闭一个非交互的连接之前要等待的秒数
+show global variables like 'wait_timeout'; 
+
+-- 调试 避免too many connect
+set GLOBAL max_connections=1000; 
+set global wait_timeout=300; 
+```
+
+# postgres10版本，匿名函数+二维数组使用
+![1681181489023](image/oracle-learn/1681181489023.png)    
+
+
+

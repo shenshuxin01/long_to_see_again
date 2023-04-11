@@ -3,6 +3,54 @@
 
 # 多线程
 ## 线程池
+
+自定义参数创建线程池ThreadPoolExecutor
+```java
+import java.util.concurrent.*;
+
+public class T2 {
+    public static void main(String[] args) {
+        //定义线程池
+        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
+                2,
+                4,
+                1,
+                TimeUnit.MINUTES,
+                getQuery(),//BlockingQueue<Runnable> workQueue,
+                new ThreadFactory() {
+                    @Override
+                    public Thread newThread(Runnable r) {
+                        return null;
+                    }
+                },
+                //AbortPolicy         -- 当任务添加到线程池中被拒绝时，它将抛出 RejectedExecutionException 异常。
+                new ThreadPoolExecutor.AbortPolicy()
+                //CallerRunsPolicy    -- 当任务添加到线程池中被拒绝时，会在线程池当前正在运行的Thread线程池中处理被拒绝的任务。
+//                new ThreadPoolExecutor.CallerRunsPolicy()
+                //DiscardOldestPolicy -- 当任务添加到线程池中被拒绝时，线程池会放弃等待队列中最旧的未处理任务，然后将被拒绝的任务添加到等待队列中。
+//                new ThreadPoolExecutor.DiscardOldestPolicy()
+                //DiscardPolicy       -- 当任务添加到线程池中被拒绝时，线程池将丢弃被拒绝的任务。
+//                new ThreadPoolExecutor.DiscardPolicy()
+        );
+
+        //运行线程池
+        Runnable runnable=null;
+        threadPoolExecutor.execute(runnable);
+        threadPoolExecutor.shutdown();
+    }
+
+     static <T> BlockingQueue<T> getQuery(){ //此处的T为 Runnable类型
+         ArrayBlockingQueue<T> arrayBlockingQueue = new ArrayBlockingQueue<>(10); // 数组实现：new Object[capacity]; 有界队列
+         LinkedBlockingDeque<T> linkedBlockingDeque = new LinkedBlockingDeque<>();//链表实现：class Node<E>{}; 无界队列
+         SynchronousQueue<T> synchronousQueue = new SynchronousQueue<>();//此容器不会存储数据，必须有另一个线程正在等待接收这个元素。同步移交队列
+         PriorityBlockingQueue<Object> priorityBlockingQueue = new PriorityBlockingQueue<>();//PriorityBlockingQueue是一个无界的基于数组的优先级阻塞队列
+         return null;//选择一个进行返回
+    }
+}
+```
+[https://blog.csdn.net/weixin_48835367/article/details/129144975?spm=1001.2014.3001.5501](https://blog.csdn.net/weixin_48835367/article/details/129144975?spm=1001.2014.3001.5501)
+
+
 ## 线程生命周期
 
 # 网络IO

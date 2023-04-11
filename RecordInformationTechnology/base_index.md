@@ -25,6 +25,8 @@
 # oracle
 - [sql语法](./detail_files/oracle/oracle-learn.md#sql语法)
 - [sql优化](./detail_files/oracle/oracle-learn.md#sql优化)
+- [mysql too many connections](./detail_files/oracle/oracle-learn.md#mysql-too-many-connections-解决方法)
+- [postgres10版本匿名函数二维数组使用](./detail_files/oracle/oracle-learn.md#postgres10版本匿名函数二维数组使用)
 
 # ETL
 - [informatica](./detail_files/ETL/etl-learn.md#informatica)

@@ -79,7 +79,7 @@ maven配置文件的profiles功能类似于springboot的`spring.profiles.active`
     </plugins>
     ```
     执行命令`mvn demo-ssx:hello`或者idea中右侧maven的plugin选项
-
+    ![1681178999560](image/maven-learn/1681178999560.png)
 
 6. 源码github参考 
 [https://github.com/shenshuxin01/maven_diy_plugin/tree/master](https://github.com/shenshuxin01/maven_diy_plugin/tree/master)
