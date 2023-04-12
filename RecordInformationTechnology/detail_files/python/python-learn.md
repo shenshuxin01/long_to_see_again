@@ -16,4 +16,5 @@
 [gitee](https://gitee.com/shenshuxin01/python-script-202205)
 ![1681095966213](image/python-learn/1681095966213.png)
 
-
+# pip3使用安装python3的依赖
+`pip3 install requests`

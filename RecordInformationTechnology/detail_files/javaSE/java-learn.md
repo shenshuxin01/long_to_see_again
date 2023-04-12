@@ -67,3 +67,81 @@ Java IO的各种流是阻塞的。这意味着，当一个线程调用 read() �
 ## AIO
 AIO 也就是 NIO 2。在 Java 7 中引入了 NIO 的改进版 NIO 2,它是异步非阻塞的IO模型。异步 IO 是基于事件和回调机制实现的，也就是应用操作之后会直接返回，不会堵塞在那里，当后台处理完成，操作系统会通知相应的线程进行后续的操作。
 
+
+# java生产者消费者同步模式
+开启2个线程，A线程分别打印字符ABC，B线程分别打印123。实现交替打印最终结果是A1B2C3。
+使用java的synchronized和wait() notify()实现
+```java
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+static class Main {
+    public static int count = 0;
+
+    public static void main(String[] args) throws Exception {
+        ExecutorService threadPool = Executors.newFixedThreadPool(2);
+        Product product = new Product();
+        Condumer condumer = new Condumer();
+        LockDemo lockDemo = new LockDemo();
+
+        threadPool.execute(() -> {
+            for (int i = 0; i < 100; i++) {
+                product.addSomething(lockDemo);
+            }
+        });
+        threadPool.execute(() -> {
+            for (int i = 0; i < 100; i++) {
+                condumer.delSomething(lockDemo);
+            }
+        });
+        Thread.sleep(3000);
+        System.out.println(count);
+        threadPool.shutdown();
+    }
+}
+
+static class Product {
+    public void addSomething(Object o) {
+        synchronized (o) {
+            if (Main.count == 0) {
+                Main.count++;
+                System.out.println("生产者：" + Main.count);
+                o.notify();
+            } else {
+                try {
+                    o.wait();//让当前线程进入等待状态，同时，wait ()也会让当前线程释放它所持有的锁
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+}
+
+static class Condumer {
+    public void delSomething(Object o) {
+        synchronized (o) {
+            if (Main.count == 1) {
+                Main.count--;
+                System.out.println("消费者：" + Main.count);
+                o.notify();
+            } else {
+                try {
+                    o.wait();//让当前线程进入等待状态，同时，wait ()也会让当前线程释放它所持有的锁
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+}
+
+static class LockDemo {
+    public void main(String[] args) {
+
+    }
+}
+
+```
+
+

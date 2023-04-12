@@ -38,3 +38,12 @@
     - 编译期：切面在目标类编译时被织入。AspectJ的织入编译器是以这种方式织入切面的。
     - 类加载期：切面在目标类加载到JVM时被织入。需要特殊的类加载器，它可以在目标类被引入应用之前增强该目标类的字节码。AspectJ5的加载时织入就支持以这种方式织入切面。
     - 运行期：切面在应用运行的某个时刻被织入。一般情况下，在织入切面时，AOP容器会为目标对象动态地创建一个代理对象。SpringAOP就是以这种方式织入切面。
+
+# logback时区设置东八区-生产环境配置
+```java
+//写在springboot启动类main里面
+//设置时区东八区
+TimeZone timeZone = TimeZone.getTimeZone("GMT+08");
+TimeZone.setDefault(timeZone);
+System.out.println("current time:"+ new Date());
+```
