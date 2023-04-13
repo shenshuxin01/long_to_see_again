@@ -56,6 +56,7 @@
 
 ## ssm框架
 - [ssm](./detail_files/spring/SSM%E7%BB%8F%E5%85%B8%E6%A1%86%E6%9E%B6/SSM.md)
+- [ssm项目本地开发启动步骤](./detail_files/spring/SSM%E7%BB%8F%E5%85%B8%E6%A1%86%E6%9E%B6/SSM.md#ssm项目本地开发启动步骤)
 - [ssm整合：这是第三次自己整合了](https://blog.csdn.net/weixin_48835367/article/details/117533594?spm=1001.2014.3001.5502)
 
 
@@ -64,6 +65,7 @@
 - [自定义maven插件plugin](./detail_files/maven/maven-learn.md#自定义maven插件plugin)
 - [jar包管理仓库nexus](./detail_files/maven/nexus-learn.md)
 - [关于maven下载依赖失败问题](./detail_files/maven/nexus-learn.md#关于maven下载依赖失败问题)
+- [maven下载依赖指定仓库地址](./detail_files/maven/maven-learn.md#maven下载依赖指定仓库地址)
 
 
 # 脚本

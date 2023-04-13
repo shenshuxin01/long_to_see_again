@@ -12,3 +12,9 @@ spring springmvc mybatis 后期研究源码记录笔记于此
 # ssm和jsp项目
 - [github源码](https://github.com/shenshuxin01/SSM_Fourth)
 
+# ssm项目本地开发启动步骤
+1. 下载ssm源码
+2. 下载tomcat9，新版本的tomcat最低支持jdk11
+3. ssm进行打包war包
+4. 把war包复制到tomcat的/webapp目录下
+5. 启动tomcat打开8080端口即可

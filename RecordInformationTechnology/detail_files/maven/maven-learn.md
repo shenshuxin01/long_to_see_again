@@ -84,3 +84,18 @@ maven配置文件的profiles功能类似于springboot的`spring.profiles.active`
 6. 源码github参考 
 [https://github.com/shenshuxin01/maven_diy_plugin/tree/master](https://github.com/shenshuxin01/maven_diy_plugin/tree/master)
 
+
+# maven下载依赖指定仓库地址
+```xml
+<repositories>
+    <repository>
+        <id>alibaba-public</id>
+        <url>https://maven.aliyun.com/repository/public</url>
+    </repository>
+    <repository>
+        <id>maven-public</id>
+        <url>http://192.168.192.129:8081/repository/maven-public/</url>
+    </repository>
+</repositories>
+```
+上面的机制就是先去阿里仓库下载，如果下载失败会去第二个配置仓库中下载。
