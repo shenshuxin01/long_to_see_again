@@ -1,15 +1,16 @@
 @echo off
-@REM charset=GB18030 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Åµï¿½ C:\Users\shenshuxin\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\StartupÂ·ï¿½ï¿½ï¿½ï¿½ Êµï¿½Ö¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
-@REM ä¸­æ–‡ä¹±ç ä½¿ç”¨ GB18030ç¼–ç æ‰“å¼€ï¼Œå› ä¸ºwindowsä½¿ç”¨çš„æ˜¯æ­¤ç¼–ç ï¼Œbatè„šæœ¬åº”ä¿æŒä¸€è‡´
-echo 'Ö´ï¿½ï¿½Ã¿ï¿½Õ¸ï¿½ï¿½ï¿½bingï¿½ï¿½Ö½-ï¿½ï¿½Ê¼'
+@REM charset=GB18030 „1¤7„1¤7„1¤7„1¤7„1¤7„1¤70‘4„1¤7„1¤70–7„1¤7 C:\Users\shenshuxin\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup¡¤„1¤7„1¤7„1¤7„1¤7 0µ6„1¤70÷5„1¤7„1¤7„1¤7„1¤7„1¤7„1¤7„1¤7„1¤7„1¤7 
+@REM ÖĞÎÄÂÒÂëÊ¹ÓÃ GB18030±àÂë´ò¿ª£¬ÒòÎªwindowsÊ¹ÓÃµÄÊÇ´Ë±àÂë£¬bat½Å±¾Ó¦±£³ÖÒ»ÖÂ
+echo '0ö4„1¤7„1¤70‹7„1¤70ğ4„1¤7„1¤7„1¤7bing„1¤7„1¤70÷3-„1¤7„1¤70¶3'
 
 
 
 
-timeout 10
-if "%1"=="h" goto begin
-start mshta vbscript:createobject("wscript.shell").run("""%~nx0"" h",0)(window.close)&&exit
-:begin
- 
-python D:\appdata\ssx_private\long_to_see_again\learn-demo\bing_backgrounds_picture_everyday.py
-echo 'Ö´ï¿½ï¿½Ã¿ï¿½Õ¸ï¿½ï¿½ï¿½bingï¿½ï¿½Ö½-ï¿½ï¿½ï¿½'
+timeout 5
+
+@REM if "%1"=="h" goto begin
+@REM start mshta vbscript:createobject("wscript.shell").run("""%~nx0"" h",0)(window.close)&&exit
+@REM :begin
+
+pythonw  D:\appdata\ssx_private\long_to_see_again\RecordInformationTechnology\detail_files\½Å±¾\win10Ã¿ÈÕ¸ü»»bing±ÚÖ½\bing_backgrounds_picture_everyday.py
+

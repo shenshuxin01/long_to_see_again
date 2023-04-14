@@ -111,6 +111,7 @@
 - [tcp四次挥手](./detail_files/https/tcp-learn.md#tcp四次挥手)
 - [nginx部署](./detail_files/https/https-learn.md#nginx部署)
 - [nginx完全指南](./detail_files/https/https-learn.md#nginx完全指南)
+- [nginx功能](./detail_files/https/https-learn.md#nginx功能)
 - [配置项目外网访问（公网IP+DDNS）](https://blog.csdn.net/weixin_48835367/article/details/127714985?spm=1001.2014.3001.5502)
 
 
