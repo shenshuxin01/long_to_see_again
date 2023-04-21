@@ -2,3 +2,5 @@
 
 # bat命令
 - `findstr` 相当于grep
+- `netstat -aon|findstr "80" ` 查看windows端口号
+tasklist | findstr ""

@@ -22,4 +22,12 @@
 - `netstat -tlnp`
 - `ln -s 文件 自定义link名字`
 
+# curl添加header请求
+```shell
+curl -H 'Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJwcm8tc2VydmVyIiwicHJpdmlsZWdlIjoiMyIsImV4cCI6MTY4MjEyNDkyNywidXNlciI6InNoZW5zaHV4aW4wMSJ9.glUFbVsc8nssmi1Ok6sBvssNn7RwKMu1FDiwjgjOKxg' -X GET http://shenshuxin.tpddns.cn:10/gateway/admin-server/ 
+```
 
+# 删除多余文件k8s java日志
+```shell
+rm -f ` ls -t | awk -F.  'BEGIN {k="aaa";print "删除文件开始"} NR==1 {k = $(NF-1) }  { if (!($0 ~ k)){ print $0,k}}'`
+```
