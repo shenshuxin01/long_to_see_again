@@ -3,4 +3,5 @@
 # bat命令
 - `findstr` 相当于grep
 - `netstat -aon|findstr "80" ` 查看windows端口号
-tasklist | findstr ""
+- `tasklist | findstr "8080"` 相当于ps -ef | grep 8080
+
