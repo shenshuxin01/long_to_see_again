@@ -193,8 +193,9 @@
 # YApi
 - [YApi接口文档,可以把swagger接口转换mock假接口调用](https://yapi.uihtm.com/index/)
 
-# untitled
-- [untitled基础](./detail_files/md#基础)
+# leetCode算法数据结构
+- [算法](./detail_files/LeetCode%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/lc-algorithms-learn.md)
+- [数据结构](./detail_files/LeetCode%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/lc-data-structure-learn.md)
 
 # untitled
 - [untitled基础](./detail_files/md#基础)
