@@ -132,7 +132,26 @@ public class Order {
 
 ```
 
-
+# mybatis参数查询多个参数，不同类型，参数方法查询
+接口类
+```
+Map<String,Object> querySome(@Param("pojo") SomePOJOBean pojo,@Param("list") List list,@Param("name") String name);
+```
+xml文件
+```
+<select id="querySome" parameterType="BaseResultMap">
+    SELECT
+      1
+    FROM
+      table_name
+    where 1=1
+    <if test="name != null">
+      and col_1 = #{name}
+    </if>
+    and col_2 = #{pojo.xxx}
+    and col_3 in #{list} --foreach改成
+</select>
+```
 
 
 

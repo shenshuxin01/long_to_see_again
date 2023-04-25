@@ -53,6 +53,7 @@
 - [mybatis的一级二级缓存](./detail_files/spring/mybatis/mybatis-learn.md#mybatis的一级二级缓存)
 - [自定义mybatis插件](./detail_files/spring/mybatis/mybatis-learn.md#自定义mybatis插件)
 - [mybatis-plus使用](./detail_files/spring/mybatis/mybatis-learn.md#mybatis-plus使用)
+- [mybatis参数查询多个参数，不同类型，参数方法查询](./detail_files/spring/mybatis/mybatis-learn.md#mybatis参数查询多个参数不同类型参数方法查询)
 
 ## ssm框架
 - [ssm](./detail_files/spring/SSM%E7%BB%8F%E5%85%B8%E6%A1%86%E6%9E%B6/SSM.md)
