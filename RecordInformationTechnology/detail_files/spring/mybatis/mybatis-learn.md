@@ -134,11 +134,11 @@ public class Order {
 
 # mybatis参数查询多个参数，不同类型，参数方法查询
 接口类
-```
+```java
 Map<String,Object> querySome(@Param("pojo") SomePOJOBean pojo,@Param("list") List list,@Param("name") String name);
 ```
 xml文件
-```
+```xml
 <select id="querySome" parameterType="BaseResultMap">
     SELECT
       1

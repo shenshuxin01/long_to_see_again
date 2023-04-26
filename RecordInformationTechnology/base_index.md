@@ -27,6 +27,7 @@
 - [长时长视频java存储及vue播放解决方法](https://blog.csdn.net/weixin_48835367/article/details/128722845?spm=1001.2014.3001.5502)
 - [java实现【国密SM4】加密解密-CBC模式](https://blog.csdn.net/weixin_48835367/article/details/123914276?spm=1001.2014.3001.5502)
 - [java生产者消费者同步模式](./detail_files/javaSE/java-learn.md#java生产者消费者同步模式)
+- [函数式接口function](./detail_files/javaSE/java-learn.md#函数式接口function)
 
 # oracle
 - [sql语法](./detail_files/oracle/oracle-learn.md#sql语法)

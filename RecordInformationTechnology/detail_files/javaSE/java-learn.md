@@ -144,4 +144,22 @@ static class LockDemo {
 
 ```
 
+# 函数式接口Function
+```java
+Function<Integer,String> function = new Function<Integer,String>() {
+    @Override
+    public String apply(Integer s) {
+        return "converse"+s;
+    }
+};
 
+BiFunction<String,Integer, BigDecimal> biFunction = new BiFunction<String, Integer, BigDecimal>() {
+    @Override
+    public BigDecimal apply(String s, Integer integer) {
+        return new BigDecimal(integer);
+    }
+};
+
+System.out.println(function.apply(22));
+System.out.println(biFunction.apply("a",33));
+```
