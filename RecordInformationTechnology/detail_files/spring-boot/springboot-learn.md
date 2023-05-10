@@ -11,3 +11,6 @@
 # springboot启动流程
 自己看源码
 
+# 知识点
+1. 复制一个实体类的属性到另一个实体类
+`org.springframework.beans.BeanUtils.copyProperties(pojo1,pojo2);`
