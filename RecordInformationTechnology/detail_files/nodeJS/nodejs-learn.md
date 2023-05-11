@@ -11,8 +11,6 @@ node -v
 # 运行x.js文件
 node ./x.js
 
-# 查看已安装的包
-npm ls -g --depth 0
 ```
 
 # 常用npm命令
