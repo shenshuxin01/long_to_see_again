@@ -85,6 +85,12 @@ command1 || command2
 ![1683697416896](image/linux-command/1683697416896.png)
 
 
+# 查看电脑cpu架构，用于版本软件下载
+![1683792074282](image/linux-command/1683792074282.png)
+1. windows查看 cmd
+`systeminfo | findstr "系统类型" `
+2. linux查看 shell
+`linux命令 lscpu | grep "Architecture"`
 
 
 

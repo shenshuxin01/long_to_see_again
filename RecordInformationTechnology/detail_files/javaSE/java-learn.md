@@ -163,3 +163,9 @@ BiFunction<String,Integer, BigDecimal> biFunction = new BiFunction<String, Integ
 System.out.println(function.apply(22));
 System.out.println(biFunction.apply("a",33));
 ```
+
+# Optional处理null值
+`Optional.ofNullable("不确定这个是不是null").orElse("另一个").getClass()`
+
+
+
