@@ -11,3 +11,14 @@ node -v
 # 运行x.js文件
 node ./x.js
 ```
+
+# 常用npm命令
+npm是一个依赖包包管理器，每个包都是js文件模块的。就相当于maven和java的关系
+```shell
+# 查看本地安装的所有npm包
+npm list -g --depth 0
+
+# 删除本地包
+npm uninstall -g xxx
+
+```
