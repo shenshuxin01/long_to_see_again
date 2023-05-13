@@ -202,8 +202,8 @@
 # home bridge
 - [home bridge](./detail_files/home-bridge/homebridge-learn.md)
 
-# untitled
-- [untitled基础](./detail_files/md#基础)
+# home assisant
+- [home assisant](./detail_files/home-assisant/homeassisant-learn.md)
 
 # untitled
 - [untitled基础](./detail_files/md#基础)
