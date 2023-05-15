@@ -169,3 +169,19 @@ System.out.println(biFunction.apply("a",33));
 
 
 
+# 单例模式常用实现
+```java
+    private static ExecutorService executorSingle;
+
+    public static void startSingle(Runnable runnable){
+        //单例模式 双重校验锁
+        if (executorSingle==null) {
+            synchronized (ExecutorThreadPool.class){
+                if (executorSingle==null) {
+                    executorSingle = Executors.newSingleThreadExecutor();
+                }
+            }
+        }
+        executorSingle.execute(runnable);
+    }
+```

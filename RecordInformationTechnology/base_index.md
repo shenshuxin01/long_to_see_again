@@ -28,6 +28,8 @@
 - [java实现【国密SM4】加密解密-CBC模式](https://blog.csdn.net/weixin_48835367/article/details/123914276?spm=1001.2014.3001.5502)
 - [java生产者消费者同步模式](./detail_files/javaSE/java-learn.md#java生产者消费者同步模式)
 - [函数式接口function](./detail_files/javaSE/java-learn.md#函数式接口function)
+- [optional处理null值](./detail_files/javaSE/java-learn.md#optional处理null值)
+- [单例模式常用实现](./detail_files/javaSE/java-learn.md#单例模式常用实现)
 
 # oracle
 - [sql语法](./detail_files/oracle/oracle-learn.md#sql语法)
