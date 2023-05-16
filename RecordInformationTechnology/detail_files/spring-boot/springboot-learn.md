@@ -14,3 +14,26 @@
 # 知识点
 1. 复制一个实体类的属性到另一个实体类
 `org.springframework.beans.BeanUtils.copyProperties(pojo1,pojo2);`
+
+# 通过actuator动态配置日志级别
+首先配置文件开启
+```yaml
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 'loggers'
+```
+```sh
+# 查询日志级别
+curl http://localhost:8091/actuator/loggers/ssx.demo.specialarchlinuxprovider.controller.autorunscript.impl
+#{
+#     "configuredLevel": "INFO",
+#     "effectiveLevel": "INFO"
+# }
+
+curl -X POST 来访者IP \
+-H "Content-Type: application/vnd.spring-boot.actuator.v2+json;charset=UTF-8" \
+--data '{"configuredLevel":"info"}'
+
+```

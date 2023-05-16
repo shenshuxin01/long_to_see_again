@@ -117,6 +117,7 @@
 - [nginx完全指南](./detail_files/https/https-learn.md#nginx完全指南)
 - [nginx功能](./detail_files/https/https-learn.md#nginx功能)
 - [配置项目外网访问（公网IP+DDNS）](https://blog.csdn.net/weixin_48835367/article/details/127714985?spm=1001.2014.3001.5502)
+- [nginx转发](./detail_files/https/https-learn.md#nginx转发)
 
 
 # redis

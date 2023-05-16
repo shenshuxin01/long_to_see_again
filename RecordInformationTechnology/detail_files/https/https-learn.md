@@ -89,7 +89,13 @@ acme.sh --install-cert -d example.com \
 4. 静态文件缓存
 
 
-
+# nginx转发
+```sh
+location /gateway/ {
+    proxy_pass http://node101:30501;
+    rewrite "^/gateway/(.*)$" /$1 break;
+}
+```
 
 
 
