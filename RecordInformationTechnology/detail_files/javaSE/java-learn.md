@@ -4,7 +4,12 @@
 # 多线程
 ## 线程池
 
-自定义参数创建线程池ThreadPoolExecutor
+自定义参数创建线程池ThreadPoolExecutor，运行情况：
+线程池创建后，不会自己去new线程，只有执行execute方法才可能创建线程：
+1. 当前线程数小于核心线程数，那么创建新线程执行任务，并且线程池数量+1
+2. 当前线程数大于核心线程数，任务队列没满，任务则放入队列
+3. 当前线程数大于核心线程数，任务队列已满，当前线程数小于最大线程数，那么创建新线程执行任务，并且线程池数量+1
+4. 当前线程数大于核心线程数，任务队列已满，当前线程数大于等于最大线程数，那么执行线程拒绝策略
 ```java
 import java.util.concurrent.*;
 
@@ -20,7 +25,7 @@ public class T2 {
                 new ThreadFactory() {
                     @Override
                     public Thread newThread(Runnable r) {
-                        return null;
+                        return new Thread(r);//注意此处创建必须传入参数，不然线程不执行
                     }
                 },
                 //AbortPolicy         -- 当任务添加到线程池中被拒绝时，它将抛出 RejectedExecutionException 异常。

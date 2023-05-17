@@ -17,3 +17,11 @@
 明白了位掩码的作用以后，我们就可以通过它来对权限集二进制数进行操作了。
 
 
+# 二叉树广度、深度优先遍历
+![1684284000908](image/lc-algorithms-learn/1684284000908.png)
+
+## 深度优先搜索（DFS，Depth First Search）
+例如上图遍历顺序：ABDECFG
+
+## 广度优先搜索（BFS，Breadth First Search）
+例如上图顺序：ABCDEFG

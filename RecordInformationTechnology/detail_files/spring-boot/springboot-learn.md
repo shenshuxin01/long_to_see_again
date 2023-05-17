@@ -32,8 +32,7 @@ curl http://localhost:8091/actuator/loggers/ssx.demo.specialarchlinuxprovider.co
 #     "effectiveLevel": "INFO"
 # }
 
-curl -X POST 来访者IP \
+curl -X POST http://localhost:8091/actuator/loggers/ssx.demo.specialarchlinuxprovider \
 -H "Content-Type: application/vnd.spring-boot.actuator.v2+json;charset=UTF-8" \
 --data '{"configuredLevel":"info"}'
-
 ```
