@@ -45,10 +45,10 @@ example_load_platform:
 
 # Example configuration.yaml entry
 logger:
-  default: info
+  default: error
   logs:
-    homeassistant.components.yamaha: info
-    custom_components.my_integration: debug
+    custom_components.example_load_platform: info
+    custom_components.hass_cozylife_local_pull: info
 ```
 
 # 集成第三方平台插件：cozylife
