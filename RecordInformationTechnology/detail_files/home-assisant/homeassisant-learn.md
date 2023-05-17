@@ -31,7 +31,8 @@ frontend:
 
 # Text to speech
 tts:
-  - platform: google_translate
+  - platform: edge_tts
+    language: zh-CN # Default language or voice (Optional)
 
 automation: !include automations.yaml
 script: !include scripts.yaml
