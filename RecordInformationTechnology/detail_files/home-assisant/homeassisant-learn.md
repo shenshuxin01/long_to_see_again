@@ -64,3 +64,23 @@ https://github.com/cozylife/hass_cozylife_local_pull/issues/6
 https://hacs.xyz/docs/setup/download
 
 # 开发插件
+https://github.com/shenshuxin01/home-assisant-ssx-example-custom-config/tree/master/custom_components/example_load_platform
+
+# 开发HA服务service调用插件
+例如 tts
+- https://www.home-assistant.io/integrations/tts#post-apitts_get_url
+- https://github.com/hasscc/hass-edge-tts
+
+
+
+
+
+
+
+
+
+
+
+
+
+
