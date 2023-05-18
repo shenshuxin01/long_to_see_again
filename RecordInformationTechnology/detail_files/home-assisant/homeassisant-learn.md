@@ -16,6 +16,7 @@ docker run -d \
   -e TZ=Asia/Shanghai \
   -v /home/ssx/appdata/homeassisant/config:/config \
   -v /etc/localtime:/etc/localtime \
+  -v /home/ssx/appdata/homeassisant/media/cdrom:/media/cdrom \
   --network=host \
   ghcr.io/home-assistant/home-assistant:stable
 ```
@@ -32,7 +33,10 @@ frontend:
 # Text to speech
 tts:
   - platform: edge_tts
-    language: zh-CN # Default language or voice (Optional)
+    service_name: xiaomo_say # service: tts.xiaomo_say
+    language: zh-CN-XiaoxiaoNeural
+    volume: +10%
+
 
 automation: !include automations.yaml
 script: !include scripts.yaml
@@ -56,5 +60,27 @@ logger:
 因为我买了他家的一个控制灯泡，需要集成下
 https://github.com/cozylife/hass_cozylife_local_pull/issues/6
 
+# 安装hacs
+https://hacs.xyz/docs/setup/download
 
 # 开发插件
+https://github.com/shenshuxin01/home-assisant-ssx-example-custom-config/tree/master/custom_components/example_load_platform
+
+# 开发HA服务service调用插件
+例如 tts
+- https://www.home-assistant.io/integrations/tts#post-apitts_get_url
+- https://github.com/hasscc/hass-edge-tts
+
+
+
+
+
+
+
+
+
+
+
+
+
+
