@@ -17,7 +17,6 @@ docker run -d \
   -v /home/ssx/appdata/homeassisant/config:/config \
   -v /etc/localtime:/etc/localtime \
   -v /home/ssx/appdata/homeassisant/media/cdrom:/media/cdrom \
-  --network=host \
   ghcr.io/home-assistant/home-assistant:stable
 ```
 ## 修改配置文件`configuration.yaml`
@@ -29,6 +28,9 @@ default_config:
 # Load frontend themes from the themes folder
 frontend:
   themes: !include_dir_merge_named themes
+
+#开启rest服务调用
+api:
 
 # Text to speech
 tts:
@@ -71,15 +73,35 @@ https://github.com/shenshuxin01/home-assisant-ssx-example-custom-config/tree/mas
 - https://www.home-assistant.io/integrations/tts#post-apitts_get_url
 - https://github.com/hasscc/hass-edge-tts
 - https://www.home-assistant.io/integrations/sensor.rest
+- https://developers.home-assistant.io/docs/api/rest
 
+1. 需要在configuration.yaml配置新增
+    - `api:`
+2. 登录homeassistant页面设置里面新增token
 
+## 调用示例
+```yaml
+service: switch.toggle
+data: {}
+target:
+  entity_id: switch.example_load_platform_ssxswitchentity_attr_unique_id
+```
+## 获取所有的服务
+<!-- -H "Authorization: Bearer <ACCESS TOKEN>" -->
+```sh
+curl \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJlZmRiZTFhNDAzNmU0YjY2YTZiZjI1NDdmY2RlNDE1MCIsImlhdCI6MTY4NDQ3OTk2OSwiZXhwIjoxOTk5ODM5OTY5fQ.ZWDfUy705dTshZvGUSDYs2tJtAsiZlystG80Iy5ssOc" \
+  -H "Content-Type: application/json" \
+  http://shenshuxin.tpddns.cn:31/api/services
+```
 
+## 调用服务实例，例如改变switch的状态关开
+```sh
+curl \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJlZmRiZTFhNDAzNmU0YjY2YTZiZjI1NDdmY2RlNDE1MCIsImlhdCI6MTY4NDQ3OTk2OSwiZXhwIjoxOTk5ODM5OTY5fQ.ZWDfUy705dTshZvGUSDYs2tJtAsiZlystG80Iy5ssOc" \
+  -H "Content-Type: application/json" \
+  -d '{"entity_id": "switch.example_load_platform_ssxswitchentity_attr_unique_id"}' \
+  http://shenshuxin.tpddns.cn:31/api/services/switch/toggle
 
-
-
-
-
-
-
-
+```
 
