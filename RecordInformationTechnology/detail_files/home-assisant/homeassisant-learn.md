@@ -70,8 +70,7 @@ https://github.com/shenshuxin01/home-assisant-ssx-example-custom-config/tree/mas
 例如 tts
 - https://www.home-assistant.io/integrations/tts#post-apitts_get_url
 - https://github.com/hasscc/hass-edge-tts
-
-
+- https://www.home-assistant.io/integrations/sensor.rest
 
 
 
