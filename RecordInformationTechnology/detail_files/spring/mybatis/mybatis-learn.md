@@ -4,7 +4,7 @@ ORM（Object/Relational Mapping）即对象关系映射，是一种数据持久�
 
 # Mybatis的一级、二级缓存
 对于缓存数据更新机制，当某一个作用域(一级缓存 Session/二级缓存Namespaces)的进行了C/U/D 操作后，默认该作用域下所有 select 中的缓存将被 clear。
-- 一级缓存: 基于 PerpetualCache 的 HashMap 本地缓存，其存储作用域为 Session，当 Session flush 或 close 之后，该 Session 中的所有 Cache 就将清空，默认打开一级缓存。
+- 一级缓存: 基于 PerpetualCache 的 HashMap 本地缓存，其存储作用域为 Session（session生命周期就是每个请求线程创建一个新的session，线程之间不共享，请求结束session也销毁），当 Session flush 或 close 之后，该 Session 中的所有 Cache 就将清空，默认打开一级缓存。
 - 二级缓存与一级缓存其机制相同，默认也是采用 PerpetualCache，HashMap 存储，不同在于其存储作用域为 Mapper(Namespace)，并且可自定义存储源，如 Ehcache。默认不打开二级缓存，要开启二级缓存，使用二级缓存属性类需要实现Serializable序列化接口(可用来保存对象的状态),可在它的映射文件中配置 ；
 
 # mybatis分页
@@ -22,6 +22,7 @@ ORM（Object/Relational Mapping）即对象关系映射，是一种数据持久�
 ![mybatis-plus使用](./1680158798660.jpg)
 
 # 一对多查询xml
+## 实体类
 ```java
 public class Order {
     private Integer id;
@@ -37,11 +38,11 @@ public class Order {
     private List<OrderDetail> orderDetailList;
     //省略get、set
 ```
-
+## 接口Mapper
 ```java
-    List<Order> queryOrderList(Map map);
+List<Order> queryOrderList(Map map);
 ```
-
+## mybatis.xml
 ```xml
 <resultMap id="BaseResultMap" type="com.chouxiaozi.mybatisdruid.entity.Order" >
     <id column="id" property="id" jdbcType="INTEGER" />
@@ -72,7 +73,7 @@ public class Order {
   </select>
 ```
 
-查询结果
+## 查询结果
 ```json
 [
   {
@@ -133,11 +134,11 @@ public class Order {
 ```
 
 # mybatis参数查询多个参数，不同类型，参数方法查询
-接口类
+## 接口类
 ```java
-Map<String,Object> querySome(@Param("pojo") SomePOJOBean pojo,@Param("list") List list,@Param("name") String name);
+Map<String,Object> querySome(@Param("pojo") SomePOJOBean pojo,@Param("listA") List list,@Param("name") String name);
 ```
-xml文件
+## xml文件
 ```xml
 <select id="querySome" parameterType="BaseResultMap">
     SELECT
@@ -149,7 +150,13 @@ xml文件
       and col_1 = #{name}
     </if>
     and col_2 = #{pojo.xxx}
-    and col_3 in #{list} --foreach改成
+    <if test="listA!=null and listA.size()>0 and !listA.isEmpty()">
+      and col_3 in
+      <foreach collection="listA" open="(" close=")" item="i" separator="," >
+        #{i}
+      </foreach>
+    </if>
+    <!-- 注意 !listA.isEmpty() 调用的是java.util.List的方法，由此可知这里可以直接调用对象的方法 -->
 </select>
 ```
 
