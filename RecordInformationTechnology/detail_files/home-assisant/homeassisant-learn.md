@@ -85,12 +85,18 @@ service: switch.toggle
 data: {}
 target:
   entity_id: switch.example_load_platform_ssxswitchentity_attr_unique_id
+
+service: tts.xiaomo_say
+data:
+  entity_id: media_player.ke_fang
+  message: 能听到吗
+  cache: true
 ```
 ## 获取所有的服务
 <!-- -H "Authorization: Bearer <ACCESS TOKEN>" -->
 ```sh
 curl \
-  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJlZmRiZTFhNDAzNmU0YjY2YTZiZjI1NDdmY2RlNDE1MCIsImlhdCI6MTY4NDQ3OTk2OSwiZXhwIjoxOTk5ODM5OTY5fQ.ZWDfUy705dTshZvGUSDYs2tJtAsiZlystG80Iy5ssOc" \
+  -H "Authorization: Bearer YOUR-TOKEN" \
   -H "Content-Type: application/json" \
   http://shenshuxin.tpddns.cn:31/api/services
 ```
@@ -98,10 +104,21 @@ curl \
 ## 调用服务实例，例如改变switch的状态关开
 ```sh
 curl \
-  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJlZmRiZTFhNDAzNmU0YjY2YTZiZjI1NDdmY2RlNDE1MCIsImlhdCI6MTY4NDQ3OTk2OSwiZXhwIjoxOTk5ODM5OTY5fQ.ZWDfUy705dTshZvGUSDYs2tJtAsiZlystG80Iy5ssOc" \
+  -H "Authorization: Bearer YOUR-TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"entity_id": "switch.example_load_platform_ssxswitchentity_attr_unique_id"}' \
   http://shenshuxin.tpddns.cn:31/api/services/switch/toggle
 
 ```
+
+## 调用服务实例，例如播放语音到homepodmini
+```sh
+curl \
+  -H "Authorization: Bearer YOUR-TOKEN" \
+  -H "Content-Type: application/json;charset=GBK" \
+  -d '{"entity_id": "media_player.ke_fang","message": "能听到吗","cache": true}' \
+  http://shenshuxin.tpddns.cn:31/api/services/tts/xiaomo_say
+
+```
+
 
