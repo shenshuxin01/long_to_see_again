@@ -16,6 +16,7 @@ docker run -d \
   -e TZ=Asia/Shanghai \
   -v /home/ssx/appdata/homeassisant/config:/config \
   -v /etc/localtime:/etc/localtime \
+  --network=host \
   -v /home/ssx/appdata/homeassisant/media/cdrom:/media/cdrom \
   ghcr.io/home-assistant/home-assistant:stable
 ```
