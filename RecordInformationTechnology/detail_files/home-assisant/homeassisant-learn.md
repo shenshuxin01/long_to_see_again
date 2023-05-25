@@ -62,6 +62,8 @@ logger:
 # 集成第三方平台插件：cozylife
 因为我买了他家的一个控制灯泡，需要集成下
 https://github.com/cozylife/hass_cozylife_local_pull/issues/6
+## 自己复制了他的代码然后改动了一下，不需要外网就可以访问
+git@github.com:shenshuxin01/hass_cozylife_local_pull.git
 
 # 安装hacs
 https://hacs.xyz/docs/setup/download
