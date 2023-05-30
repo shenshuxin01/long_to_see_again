@@ -207,11 +207,14 @@
 
 # home assisant
 - [home assisant](./detail_files/home-assisant/homeassisant-learn.md)
+- [萤石摄像头](./detail_files/home-assisant/ezviz.md)
 
 # untitled
 - [untitled基础](./detail_files/md#基础)
+- [untitled基础](./detail_files/md#基础)
 
 # untitled
+- [untitled基础](./detail_files/md#基础)
 - [untitled基础](./detail_files/md#基础)
 
 # untitled
