@@ -20,6 +20,57 @@ PORT     STATE SERVICE
 ffmpeg.exe -i "rtsp://admin:XXXXXX@shenshuxin.tpddns.cn:33/h264/ch1/main/av_stream" -fflags flush_packets -flags -global_header -force_key_frames "expr:gte(t,n_forced*1)"  -hls_time 60 -hls_segment_filename ./ssxtmp/index%20d.ts ./ssxtmp/index.m3u8
 
 #获取封面图片，每60秒替换一次这个图片demo-preview.jpg
-ffmpeg -i "rtsp://admin:XXXXXX@shenshuxin.tpddns.cn:33/h264/ch1/main/av_stream" -y -f image2 -r 1/1 -update 60 demo-preview.jpg
+ffmpeg.exe -i "rtsp://admin:XXXXXX@shenshuxin.tpddns.cn:33/h264/ch1/main/av_stream" -y -f image2 -r 1/1 -update 60 demo-preview.jpg
+```
+
+![1685513836169](image/ezviz/1685513836169.png)
+
+# 萤石摄像头云台控制（上下左右）API接口
+[官网接口文档](https://open.ys7.com/doc/zh/book/index/device_ptz.html)
+```txt
+HTTP请求报文
+POST /api/lapp/device/ptz/start HTTP/1.1
+Host: open.ys7.com
+Content-Type: application/x-www-form-urlencoded
+
+accessToken=at.4g01l53x0w22xbp30ov33q44app1ns9m&deviceSerial=502608888&channelNo=1&direction=2&speed=1
+
+返回数据
+{
+    "code": "200",
+    "msg": "操作成功!"
+}
+```
+token需要在官网获取：https://open.ys7.com/console/application.html
+![1685515261991](image/ezviz/1685515261991.png)
+
+## 云台api详细步骤
+1. 登录官网获取appkey secret然后调用获取token接口
+    ```sh
+    curl --location --request POST 'https://open.ys7.com/api/lapp/token/get?appKey=XXXX&appSecret=XXXXXXX' \
+    --header 'Content-Type: application/json' \
+    --header 'Accept: */*' \
+    --data-raw ''
+    ```
+
+2. 获取摄像头设备序列号
+![1685515939076](image/ezviz/1685515939076.png)
+
+3. 启动云台旋转
+
+| 参数名 | 类型 | 描述 | 是否必选 |
+| --- | --- | --- | --- |
+| accessToken | String | 授权过程获取的access_token | Y |
+| deviceSerial | String | 设备序列号,存在英文字母的设备序列号，字母需为大写 | Y
+| channelNo | int | 通道号 | Y
+| direction | int | 操作命令：0-上，1-下，2-左，3-右，4-左上，5-左下，6-右上，7-右 | Y
+| speed | int | 云台速度：0-慢，1-适中，2-快，海康设备参数不可为0 | Y
+```sh
+curl --location --request POST 'https://open.ys7.com/api/lapp/device/ptz/start?accessToken=XXXXX&deviceSerial=BA2294767&channelNo=1&direction=2&speed=1' 
+```
+
+4. 停止云台旋转
+```sh
+curl --location --request POST 'https://open.ys7.com/api/lapp/device/ptz/stop?accessToken=XXXXX&deviceSerial=BA2294767&channelNo=1'
 ```
 
