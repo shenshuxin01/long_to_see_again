@@ -36,3 +36,14 @@ curl -X POST http://localhost:8091/actuator/loggers/ssx.demo.specialarchlinuxpro
 -H "Content-Type: application/vnd.spring-boot.actuator.v2+json;charset=UTF-8" \
 --data '{"configuredLevel":"info"}'
 ```
+
+# 全局异常处理
+```java
+@ControllerAdvice(annotetions={RestCotroller.class})
+public class MyBean{
+  @ExceptionHandler(value={RuntimeException.class})
+  public final XXX dealRun(RuntimeException e,HttpServletRequest req){
+    return null;
+  }
+}
+```
