@@ -160,7 +160,24 @@ Map<String,Object> querySome(@Param("pojo") SomePOJOBean pojo,@Param("listA") Li
 </select>
 ```
 
-
+# choose标签
+```xml
+<select id="dynamicChooseTest" parameterType="Blog" resultType="Blog">
+    select * from t_blog where 1 = 1 
+    <choose>
+        <when test="title != null">
+            and title = #{title}
+        </when>
+        <when test="content != null">
+            and content = #{content}
+        </when>
+        <otherwise>
+            and owner = "owner1"
+        </otherwise>
+    </choose>
+</select>
+```
+when元素表示当 when 中的条件满足的时候就输出其中的内容，跟 JAVA 中的 switch 效果差不多的是按照条件的顺序，***当 when 中有条件满足的时候，就会跳出 choose，***即所有的 when 和 otherwise 条件中，只有一个会输出，当所有的我很条件都不满足的时候就输出 otherwise 中的内容。所以上述语句的意思非常简单， 当 title!=null 的时候就输出 and titlte = #{title}，不再往下判断条件，当title为空且 content!=null 的时候就输出 and content = #{content}，当所有条件都不满足的时候就输出 otherwise 中的内容。
 
 
 
