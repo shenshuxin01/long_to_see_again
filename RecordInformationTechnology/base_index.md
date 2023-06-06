@@ -212,9 +212,8 @@
 # ffmpeg
 - [ffmpeg](./detail_files/ffmpeg/ffmpeg-learn.md)
 
-# untitled
-- [untitled基础](./detail_files/md#基础)
-- [untitled基础](./detail_files/md#基础)
+# linux连接工具mobaxterm
+- [mobaxterm解压版](https://mobaxterm.mobatek.net/download-home-edition.html)
 
 # untitled
 - [untitled基础](./detail_files/md#基础)
