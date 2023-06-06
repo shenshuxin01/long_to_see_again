@@ -31,4 +31,9 @@ set global wait_timeout=300;
 ![1681181489023](image/oracle-learn/1681181489023.png)    
 
 
-
+# mysql正则过滤和substring_index
+![1686018310270](image/oracle-learn/1686018310270.png)
+```sql
+-- 截取字符串 最后一个参数是截取前几个
+select substring_index('a6b6c6','6',2)
+```
