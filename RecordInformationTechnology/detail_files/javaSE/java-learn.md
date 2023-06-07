@@ -190,3 +190,12 @@ System.out.println(biFunction.apply("a",33));
         executorSingle.execute(runnable);
     }
 ```
+
+# equals和hashCode方法重写
+equals方法目的是为了判断两个对象是否相等；hashCode方法是为了获取当前对象的hash值，如果不重写的话hash值都是不一样的。
+如果想要在Map、Set集合中使用，则需要重写hashCode来保证属性一致的对象进行hash冲突
+![1686115748738](image/java-learn/1686115748738.png)
+![1686115764457](image/java-learn/1686115764457.png)
+
+
+
