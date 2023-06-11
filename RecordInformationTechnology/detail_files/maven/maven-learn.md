@@ -102,4 +102,88 @@ maven配置文件的profiles功能类似于springboot的`spring.profiles.active`
 
 
 # maven配置远程仓库mirror
-![Alt text](./image/maven-learn/image.png)
+1. 下载的maven软件目录下的settings.xml文件中的`<mrrrors>`标签是空的。
+2. maven项目使用的仓库一共有如下几种方式：
+    - 中央仓库，这是默认的仓库
+    - 镜像仓库，通过 sttings.xml 中的 settings.mirrors.mirror 配置
+    - 全局profile仓库，通过 settings.xml 中的 settings.repositories.repository 配置
+    - 项目仓库，通过 pom.xml 中的 project.repositories.repository 配置
+    - 项目profile仓库，通过 pom.xml 中的 project.profiles.profile.repositories.repository 配置
+    - 本地仓库
+3. 搜索顺序如下：
+local_repo > settings_profile_repo > pom_profile_repo > pom_repositories > settings_mirror > central
+
+## `<mrrrors>`标签使用
+1. 当`<mrrrors>`标签没有配置，并且项目中的pom文件没有指定`<repository>`标签，那么项目的jar包会从`远程仓库id是central的地址：中央仓库，这是默认的仓库`下载https://repo.maven.apache.org/maven2/ ，maven内部默认指定了central仓库地址是https://repo.maven.apache.org/maven2/ 。也就是说这个默认的配置是兜底的
+
+2. 当`<mrrrors>`标签配置如下，并且项目中的pom文件没有指定`<repository>`标签
+    ```xml
+    <mirror>
+        <id>settingsMirrorAliyun</id>
+        <mirrorOf>abc</mirrorOf>
+        <name>阿里maven镜像</name>
+        <url>https://maven.aliyun.com/nexus/content/repositories/central</url>
+    </mirror>
+    ```
+    那么项目的jar包会从`远程仓库id是central的地址`下载https://repo.maven.apache.org/maven2/
+    ，上面的配置表示如果请求的仓库id是abc,那么就使用这个阿里的地址下载，
+
+
+3. 当`<mrrrors>`标签配置如下，并且项目中的pom文件没有指定`<repository>`标签
+    ```xml
+    <mirror>
+        <id>settingsMirrorAliyun</id>
+        <mirrorOf>central</mirrorOf>
+        <name>阿里maven镜像</name>
+        <url>https://maven.aliyun.com/nexus/content/repositories/central</url>
+    </mirror>
+    ```
+    那么项目的jar包会从`远程仓库id是central的地址`下载https://maven.aliyun.com/nexus/content/repositories/central
+，此时maven的中央仓库被镜像到了阿里
+
+
+4. 当`<mrrrors>`标签配置如下
+    ```xml
+    <mirror>
+        <id>settingsMirrorAliyun</id>
+        <mirrorOf>abc</mirrorOf>
+        <name>阿里maven镜像</name>
+        <url>https://maven.aliyun.com/nexus/content/repositories/central</url>
+    </mirror>
+    ```
+    并且项目中的pom文件指定`<repository>`标签
+    ```xml
+        <repository>
+            <id>projectPomRepo</id>
+            <name>项目指定远程仓库</name>
+            <url>https://repo.maven.apache.org/maven2/</url>
+        </repository>
+    ```
+    那么项目的jar包会从`远程仓库id是projectPomRepo的地址`下载https://repo.maven.apache.org/maven2/
+，上面的配置表示如果请求的仓库id是abc,那么就使用这个阿里的地址下载，
+
+
+
+5. 当`<mrrrors>`标签配置如下
+    ```xml
+    <mirror>
+        <id>settingsMirrorAliyun</id>
+        <mirrorOf>*</mirrorOf>
+        <name>阿里maven镜像</name>
+        <url>https://maven.aliyun.com/nexus/content/repositories/central</url>
+    </mirror>
+    ```
+    并且项目中的pom文件指定`<repository>`标签
+    ```xml
+        <repository>
+            <id>projectPomRepo</id>
+            <name>项目指定远程仓库</name>
+            <url>https://repo.maven.apache.org/maven2/</url>
+        </repository>
+    ```
+    那么项目的jar包会从`远程仓库id是projectPomRepo的地址`下载https://maven.aliyun.com/nexus/content/repositories/central
+，上面的配置表示如果请求的仓库id是任意的,那么就使用这个阿里的地址下载 
+
+## 总结一下
+当项目的pom文件没有指定`<repository>`标签的时候，项目的jar包都是默认在远程仓库id是central的地址下载，下载前需要看下有没有配置镜像，如果配置了并且仓库id匹配上，那么就在镜像地址下载。 其实上面如果配置` <mirrorOf>*</mirrorOf>`表示所有的远程仓库地址都被镜像到了阿里，如果阿里没有此jar包则会项目报错。建议的配置应该是` <mirrorOf>central</mirrorOf>`，这样的话如果阿里镜像没有的话，我们可以指定项目的`<repository>`标签指定下载地址，当然指定的仓库id不能再是central
+
