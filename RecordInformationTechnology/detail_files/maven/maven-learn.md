@@ -102,5 +102,4 @@ maven配置文件的profiles功能类似于springboot的`spring.profiles.active`
 
 
 # maven配置远程仓库mirror
-
-
+![Alt text](./image/maven-learn/image.png)
