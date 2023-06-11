@@ -99,3 +99,8 @@ maven配置文件的profiles功能类似于springboot的`spring.profiles.active`
 </repositories>
 ```
 上面的机制就是先去阿里仓库下载，如果下载失败会去第二个配置仓库中下载。
+
+
+# maven配置远程仓库mirror
+
+
