@@ -14,6 +14,9 @@
 当某个key没有被占用的时候，setnx指令会返回1，否则返回0，这就是Redis中分布式锁的使用原理。当然我们还可以在上锁之后使用expire指令给锁设置过期时间。
 Redis 2.8版本中加入了set指令的扩展参数，使得setnx指令和expire指令能够同时执行 set lock test ex 5 nxex 此方法效率高，容错率低
 
+### java redisTemplate使用
+`Boolean isSuccess = redisTemplate.opsForValue().setIfAbsent("key_1", "value1", 1, TimeUnit.MINUTES);`
+
 ## 高等级
 我们考虑这么一种情况：假设我们在redis的主节点上添加了一把分布式锁，不幸的是主节点挂掉了，而且主节点上的锁还没有同步到从节点上，如果此时有客户端来请求获得同一把锁，那么它将顺利地获得锁，之前那把锁会被无情地忽视掉，这就是分布式锁在Redis集群中遇到的麻烦。
 Redis的作者为了解决这个问题提出了一个叫**Redlock**的算法： 它的原理是这样的：当上锁的时候，把set指令发送给过半的节点，只要过半的锁set成功，就认为这次加锁成功；当解锁的时候，会向所有的节点发送del指令。
