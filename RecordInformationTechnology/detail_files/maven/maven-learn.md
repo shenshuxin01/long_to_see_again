@@ -187,3 +187,30 @@ local_repo > settings_profile_repo > pom_profile_repo > pom_repositories > setti
 ## 总结一下
 当项目的pom文件没有指定`<repository>`标签的时候，项目的jar包都是默认在远程仓库id是central的地址下载，下载前需要看下有没有配置镜像，如果配置了并且仓库id匹配上，那么就在镜像地址下载。 其实上面如果配置` <mirrorOf>*</mirrorOf>`表示所有的远程仓库地址都被镜像到了阿里，如果阿里没有此jar包则会项目报错。建议的配置应该是` <mirrorOf>central</mirrorOf>`，这样的话如果阿里镜像没有的话，我们可以指定项目的`<repository>`标签指定下载地址，当然指定的仓库id不能再是central
 
+
+# springboot项目默认打jar包后项目结构发生变化
+![1686818287937](image/maven-learn/1686818287937.png)
+## 默认的pom文件内容
+```xml
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+        </plugin>
+    </plugins>
+</build>
+```
+使用`mvn package`后生成的jar结构内容如下：
+
+![1686818242185](image/maven-learn/1686818242185.png)
+这样看我的包名不见了,如果其他模块引用了这个包并且使用某个类就找不到了。
+## 修改后的pom文件
+```xml
+<build>
+    <plugins>
+    </plugins>
+</build>
+```
+![1686819075609](image/maven-learn/1686819075609.png)
+这样就可以直接使用了
