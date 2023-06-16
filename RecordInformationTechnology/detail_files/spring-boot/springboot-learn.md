@@ -47,3 +47,14 @@ public class MyBean{
   }
 }
 ```
+curl http://node101:30501/developer-function-provider/actuator/loggers/ssx.demo.developerfunctionprovider.service.camera.ezviz
+
+curl -X POST http://node101:30501/developer-function-provider/actuator/loggers/ssx.demo.developerfunctionprovider.service.camera.ezviz \
+-H "Content-Type: application/vnd.spring-boot.actuator.v2+json;charset=UTF-8" \
+--data '{"configuredLevel":"debug"}'
+
+
+curl http://node101:30501/developer-function-provider/cameraEzviz
+
+
+-i 'rtsp://admin:AGXXZI@192.168.0.105:554/h264/ch1/main/av_stream' -fflags flush_packets -flags -global_header -force_key_frames 'expr:gte(t,n_forced*1)' -hls_time 5 -hls_segment_filename /index%20d.ts /index.m3u8

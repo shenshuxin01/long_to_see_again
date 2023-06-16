@@ -74,3 +74,8 @@ curl --location --request POST 'https://open.ys7.com/api/lapp/device/ptz/start?a
 curl --location --request POST 'https://open.ys7.com/api/lapp/device/ptz/stop?accessToken=XXXXX&deviceSerial=BA2294767&channelNo=1'
 ```
 
+# docker方式执行ffmpeg
+1. docker pull jrottenberg/ffmpeg
+ 
+2. docker run --network=host  jrottenberg/ffmpeg -v info -i 'rtsp://admin:AGXXZI@192.168.0.105:554/h264/ch1/main/av_stream' -fflags flush_packets -flags -global_header -force_key_frames 'expr:gte(t,n_forced*1)' -hls_time 5 -hls_segment_filename /index%20d.ts /index.m3u8
+
