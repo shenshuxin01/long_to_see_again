@@ -28,7 +28,7 @@ def kill_early_pid():
         # ssx.bingbackground.picture.pid19084.log
         searchObj = re.search( r'ssx\.bingbackground\.picture.pid(\d+)\.log', i, re.M|re.I)
         if searchObj:
-            print(i+ "杀死之前的进程："+ searchObj.group(1))
+            logging.info(i+ "杀死之前的进程："+ searchObj.group(1))
             pid = int(searchObj.group(1))
             #根据pid杀死进程
             process = 'taskkill /f /pid %s'%pid
