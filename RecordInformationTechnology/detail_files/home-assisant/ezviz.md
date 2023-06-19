@@ -80,10 +80,9 @@ curl --location --request POST 'https://open.ys7.com/api/lapp/device/ptz/stop?ac
 2. docker run --network=host  \
  -v /root/ssxtmp:/root/ssxtmp \
   jrottenberg/ffmpeg  \
- -rtsp_transport tcp \
- -v error  \
+ -v info  \
  -i 'rtsp://admin:AGXXZI@192.168.0.105:554/h264/ch1/main/av_stream' \
- -fflags flush_packets -flags -global_header -force_key_frames 'expr:gte(t,n_forced*1)'  \
+ -force_key_frames 'expr:gte(t,n_forced*1)'  \
  -hls_time 10 -hls_segment_filename \
  /root/ssxtmp/index_`date "+%Y%m%d%H%M%S"`_%20d.ts \
  /root/ssxtmp/index.m3u8
@@ -127,7 +126,7 @@ spec:
             - mountPath: /ssxtmp   #视频存储位置
               name: c-v-path-video
           command: ["bash"]
-          args: ["-c","/usr/local/bin/ffmpeg -rtsp_transport tcp -v error -i 'rtsp://admin:AGXXZI@192.168.0.105:554/h264/ch1/main/av_stream' -fflags flush_packets -flags -global_header -force_key_frames 'expr:gte(t,n_forced*1)' -hls_time 10 -hls_segment_filename /ssxtmp/index_`date \"+%Y%m%d%H%M%S\"`_%20d.ts /ssxtmp/index.m3u8"] # 此配置会覆盖dockerFile的CMD参数
+          args: ["-c","/usr/local/bin/ffmpeg -v info -i 'rtsp://admin:AGXXZI@192.168.0.105:554/h264/ch1/main/av_stream' -force_key_frames 'expr:gte(t,n_forced*1)' -hls_time 10 -hls_segment_filename /ssxtmp/index_`date \"+%Y%m%d%H%M%S\"`_%20d.ts /ssxtmp/index.m3u8"] # 此配置会覆盖dockerFile的CMD参数
       volumes:
         - name: c-v-path-lt
           hostPath:
@@ -138,10 +137,6 @@ spec:
       nodeSelector: #把此pod部署到指定的node标签上
         kubernetes.io/hostname: node101
 ```
-
-
-
-
 
 
 
