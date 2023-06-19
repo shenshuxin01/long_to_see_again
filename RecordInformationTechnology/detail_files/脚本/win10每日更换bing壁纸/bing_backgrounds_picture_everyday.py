@@ -2,10 +2,11 @@
 # -*- coding: UTF-8 -*-
 
 import requests, time
-import os
+import os,re
 import logging
 
 g_path = 'D:\\appdata\\bing_backgrounds\\'
+pid_path = 'D:\\'
 
 # 把旧图片移动 或者 删除 或者什么都不做
 def del_file():
@@ -18,6 +19,22 @@ def del_file():
 def get_current_time(format_time: str) -> str:
     # 移除
     return time.strftime(format_time, time.localtime())
+
+
+
+def kill_early_pid():
+    # 删除其他的相关进程
+    for i in os.listdir(pid_path):
+        # ssx.bingbackground.picture.pid19084.log
+        searchObj = re.search( r'ssx\.bingbackground\.picture.pid(\d+)\.log', i, re.M|re.I)
+        if searchObj:
+            print(i+ "杀死之前的进程："+ searchObj.group(1))
+            pid = int(searchObj.group(1))
+            #根据pid杀死进程
+            process = 'taskkill /f /pid %s'%pid
+            os.system(process)
+            #删除文件
+            os.remove(pid_path+searchObj.group(0))
 
 
 def set_bing_backgrounds():
@@ -42,13 +59,14 @@ def set_bing_backgrounds():
     pic_context = pic.content
     # 将他拷贝到本地文件 w 写  b 二进制  wb代表写入二进制文本
     # 保存路径
-    path = g_path + cur_time + title + '.jpg'
+    path = g_path + cur_time + title.replace('?','？') + '.jpg'
     with open(path, 'wb') as f:
         f.write(pic_context)
     logging.info("下载图片完成：" + path)
 
 # 查看后台运行的进程 tasklist /v | findstr bing_backgrounds_picture_everyday
 if __name__ == '__main__':
+    kill_early_pid()
     last_date = ''
     pid = os.getpid()
     logging.basicConfig(level=logging.INFO,
