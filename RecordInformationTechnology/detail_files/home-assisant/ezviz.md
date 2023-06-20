@@ -133,7 +133,7 @@ spec:
             path: /etc/localtime   #时间同步
         - name: c-v-path-video
           hostPath:
-            path: /home/app/apps/k8s/for_docker_volume/ffmpeg/current_video
+            path: /home/app/apps/k8s/for_docker_volume/nginx/static-pages/nas/ffmpeg/current_video
       nodeSelector: #把此pod部署到指定的node标签上
         kubernetes.io/hostname: node101
 ```
