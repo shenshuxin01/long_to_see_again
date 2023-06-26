@@ -126,7 +126,7 @@ spec:
             - mountPath: /ssxtmp   #视频存储位置
               name: c-v-path-video
           command: ["bash"]
-          args: ["-c","/usr/local/bin/ffmpeg -v info -i 'rtsp://admin:AGXXZI@192.168.0.105:554/h264/ch1/sub/av_stream' -force_key_frames 'expr:gte(t,n_forced*1)' -hls_time 10 -threads 1 -hls_segment_filename /ssxtmp/index_`date \"+%Y%m%d%H%M%S\"`_%20d.ts /ssxtmp/index.m3u8"] # 此配置会覆盖dockerFile的CMD参数,这里ffmpeg参数指定1，还有使用低码率的源视频流，都是为了降低cpu的转码率。目前大概在15%，如果使用默认的配置是200%
+          args: ["-c","/usr/local/bin/ffmpeg -v fatal -i 'rtsp://admin:AGXXZI@192.168.0.105:554/h264/ch1/sub/av_stream' -force_key_frames 'expr:gte(t,n_forced*1)' -hls_time 10 -threads 1 -hls_segment_filename /ssxtmp/index_`date \"+%Y%m%d%H%M%S\"`_%20d.ts /ssxtmp/index.m3u8"] # 此配置会覆盖dockerFile的CMD参数,这里ffmpeg参数指定1，还有使用低码率的源视频流，都是为了降低cpu的转码率。目前大概在15%，如果使用默认的配置是200%
       volumes:
         - name: c-v-path-lt
           hostPath:
