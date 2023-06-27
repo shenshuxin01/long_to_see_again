@@ -93,5 +93,24 @@ command1 || command2
 `linux命令 lscpu | grep "Architecture"`
 
 
+# date命令获取明天日期，时间差
+```sh
+# 明天零点日期 2023年 06月 28日 星期三 00:00:00 CST
+date -d `date -d tomorrow +%Y%m%d`
+
+# 明天零点日期的秒数 1687881600
+date +%s -d `date -d tomorrow +%Y%m%d`
+
+# 当前时间的秒数 1687831804
+date +%s
+
+# 计算明天零点距离当前时间还有多少秒
+date1=`date -d tomorrow +%Y%m%d` \
+    && date2=`date +%s -d $date1`\
+    && date3=`date +%s`\
+    && dateend=`expr $date2 - $date3`\
+    || exit 0
+
+```
 
 
