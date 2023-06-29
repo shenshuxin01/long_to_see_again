@@ -93,3 +93,35 @@ EXT-X-PLAYLIST-TYPE 字段是用来播放列表的类型信息。书写格式如
 本文重点总结和介绍了 M3U8 视频封装格式的工作原理和常用标签，由于自带分片能力，在超大视频文件存储方面，M3U8 格式具备先天的优势，因此，很多视频点播网站广泛采取该封装格式。还有更多后续继续分享，欢迎关注。
 
 
+## EXT-X-DISCONTINUITY
+让播放器重新初始化。目的连接不连续的视频片段
+```
+应用场景：
+  1）轮播不用的影片。
+  2）插入广告
+#EXTM3U
+#EXT-X-TARGETDURATION:10
+#EXT-X-MEDIA-SEQUENCE:0
+#EXTINF:10,
+400-clipA-0.ts
+#EXTINF:10,
+400-clipA-1.ts
+#EXTINF:5,
+400-clipA-2.ts
+
+#EXT-X-DISCONTINUITY
+#EXTINF:10,
+400-advert0.ts
+#EXTINF:3,
+400-advert1.ts
+
+#EXT-X-DISCONTINUITY
+#EXTINF:10,
+400-clipB-0.ts
+#EXTINF:10,
+400-clipB-1.ts
+#EXTINF:5,
+400-clipB-2.ts
+
+#EXT-X-ENDLIST
+```
