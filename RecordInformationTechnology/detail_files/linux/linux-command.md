@@ -114,3 +114,32 @@ date1=`date -d tomorrow +%Y%m%d` \
 ```
 
 
+# 删除病毒cpu1000%
+```sh
+[root@node101 .mint-xmr]# top | head
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+15870 root      20   0 4597844   2.0g      4 S  1017  3.3  52:05.95 xmrig
+
+[root@node101 .mint-xmr]# ll /proc/15870/exe
+lrwxrwxrwx. 1 root root 0 7月   5 12:17 /proc/15870/exe -> /var/tmp/.mint-xmr/xmrig
+
+[root@node101 .mint-xmr]# cd /var/tmp/.mint-xmr/
+[root@node101 .mint-xmr]# ll
+总用量 2516
+-rwxr-xr-x. 1 ssx ssx  261384 12月  4 2022 start
+-rwxr-xr-x. 1 ssx ssx  263192 12月  4 2022 updat3
+-rwxr-xr-x. 1 ssx ssx 2045432 3月  19 2022 xmrig
+
+[root@node101 .mint-xmr]# crontab -l
+@daily /var/tmp/.mint-xmr/start
+@reboot /var/tmp/.mint-xmr/updat3 > /dev/null 2>&1 & disown
+@monthly /var/tmp/.mint-xmr/updat3  > /dev/null 2>&1 & disown
+
+[root@node101 .mint-xmr]# crontab -r && rm -rf /var/tmp/.mint-xmr  && kill -9 15870
+
+[root@node101 tmp]# crontab -l
+no crontab for root
+
+```
+
+
