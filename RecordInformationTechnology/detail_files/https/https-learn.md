@@ -97,6 +97,12 @@ location /gateway/ {
 }
 ```
 
+# nginx配置401错误重定向
+1. 代码
+error_page 401 =301 http://shenshuxin.tpddns.cn:10?rewriteUrl=${http_host}${request_uri};
+2. 结果
+http://shenshuxin.tpddns.cn:10?rewriteUrl=shenshuxin.tpddns.cn:81/?aaaaa=1234
+
 
 
 
