@@ -58,3 +58,10 @@ curl http://node101:30501/developer-function-provider/cameraEzviz
 
 
 -i 'rtsp://admin:AGXXZI@192.168.0.105:554/h264/ch1/main/av_stream' -fflags flush_packets -flags -global_header -force_key_frames 'expr:gte(t,n_forced*1)' -hls_time 5 -hls_segment_filename /index%20d.ts /index.m3u8
+
+
+# web请求拦截controller层方法，继承org.springframework.web.servlet.HandlerInterceptor
+![1688690595482](image/springboot-learn/1688690595482.png)
+preHandle方法是进行处理器拦截用的，顾名思义，该方法将在Controller处理之前进行调用。
+postHandle是进行处理器拦截用的，它的执行时间是在处理器进行处理之后，也就是在Controller的方法调用之后执行，但是它会在DispatcherServlet进行视图的渲染之前执行，也就是说在这个方法中你可以对ModelAndView进行操作。
+afterCompletion方法将在整个请求完成之后，也就是DispatcherServlet渲染了视图执行。
