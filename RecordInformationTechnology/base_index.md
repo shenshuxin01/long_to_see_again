@@ -215,8 +215,8 @@
 # linux连接工具mobaxterm
 - [mobaxterm解压版](https://mobaxterm.mobatek.net/download-home-edition.html)
 
-# untitled
-- [untitled基础](./detail_files/md#基础)
+# clustrmaps
+- [clustrmaps](./detail_files/clustrmaps/clustrmaps-learn.md)
 
 # untitled
 - [untitled基础](./detail_files/md#基础)
