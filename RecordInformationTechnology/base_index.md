@@ -154,6 +154,7 @@
 # github Pages
 - [github静态页面](shenshuxin01.github.io/mainLogin/index.html)
 - [github静态页面源代码](https://github.com/shenshuxin01/shenshuxin01.github.io)
+- [连接Connection refused](https://zhuanlan.zhihu.com/p/521340971)
 
 # VCS(git\svn)
 - [SVN快速上手使用（适用于新入职同事）](https://blog.csdn.net/weixin_48835367/article/details/124285409?spm=1001.2014.3001.5502)
