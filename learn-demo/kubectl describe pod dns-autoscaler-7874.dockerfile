@@ -183,3 +183,13 @@ kubectl delete pod -n ssx ssx-mysql-dm-866796c44f-fd68j
 kubectl delete pod -n ssx ssx-nginx-dm-868f877d57-j6h7b                             
 kubectl delete pod -n ssx ssx-redis-dm-5595c59d57-zql2b                             
 kubectl delete pod -n ssx ssx-sleuth-zipkin-dm-5987dfc664-9l7kq          
+
+
+待部署的环境：
+1. elk
+2. ffmpeg
+3. kafka+zk 
+4. zipkin 
+5. node101安装buildkit
+6. 修改ssx项目的jenkins.groovy文件镜像构建方式
+7. 配置node101防火墙、防黑客侵入措施
