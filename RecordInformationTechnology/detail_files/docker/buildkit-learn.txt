@@ -1,0 +1,94 @@
+下载安装 https://github.com/moby/buildkit/releases
+官网没看到源, 所以只能用绿色包了 Releases · moby/buildkit
+去官网下载一个最新的包 buildkit-v0.8.2.linux-amd64.tar.gz ,解压后得到一个bin目录
+把这个bin目录放到 $PATH 里去
+
+启动buildkitd服务
+buildkitd默认运行在前台的,如果需要后面加一个 &
+
+用参数启动
+使用 --oci-worker=false --containerd-worker=true 参数,可以让buildkitd服务使用containerd后端
+
+buildkitd --oci-worker=false --containerd-worker=true & 
+使用配置文件启动
+创建配置文件
+
+mkdir -p /etc/buildkit/
+vim /etc/buildkit/buildkitd.toml
+配置使用containerd后端，禁用oic后端，并把默认名字空间改为"k8s.io" 把平台限制为本机类型amd64，配置垃圾回收空间限制
+
+[worker.oci]
+  enabled = false
+
+[worker.containerd]
+  enabled = true
+  # namespace should be "k8s.io" for Kubernetes (including Rancher Desktop)
+  namespace = "k8s.io"
+  platforms = [ "linux/amd64" ]
+  gc = true
+  # gckeepstorage sets storage limit for default gc profile, in MB.
+  gckeepstorage = 9000
+用此配置启动服务
+
+buildkitd --config /etc/buildkit/buildkitd.toml & 
+把buildkitd配置成系统服务
+参考 https://github.com/moby/buildkit/tree/master/examples/systemd/system
+
+首先，把 之前下载解压出来的bin目录里的文件拷贝到系统目录下(那个目录里其他文件用不上)
+
+cd bin
+cp buildctl /usr/local/bin
+cp buildkitd /usr/local/bin
+增加服务配置文件
+
+vim /usr/lib/systemd/system/buildkit.service
+如下
+
+[Unit]
+Description=BuildKit
+Requires=buildkit.socket
+After=buildkit.socket
+Documentation=https://github.com/moby/buildkit
+
+[Service]
+Type=notify
+ExecStart=/usr/local/bin/buildkitd --addr fd://
+
+[Install]
+WantedBy=multi-user.target
+
+
+增加socket配置文件
+
+vim /usr/lib/systemd/system/buildkit.socket
+如下
+
+[Unit]
+Description=BuildKit
+Documentation=https://github.com/moby/buildkit
+
+[Socket]
+ListenStream=%t/buildkit/buildkitd.sock
+SocketMode=0660
+
+[Install]
+WantedBy=sockets.target
+激活并启动服务
+
+systemctl enable buildkit
+systemctl start buildkit
+注意：如果配置文件 /etc/buildkit/buildkitd.toml 存在，服务启动时会自动装载该配置文件
+
+构建本地镜像
+buildctl build \
+    --frontend=dockerfile.v0 \
+    --local context=. \
+    --local dockerfile=. \
+    --output type=image,name=docker.io/username/image:tag
+解释:
+
+frontend可以使用网关做前端,未做其他尝试,这里直接使用dockerfile.0
+--local context 指向当前目录,这是Dockerfile执行构建时的路径上下文,比如在从目录中拷贝文件到镜像里
+--local dockerfile指向当前目录,表示Dockerfile在此目录
+--output 的 name 表示构建的镜像名称
+构建完成后镜像会存在本地containerd的buildkit名字空间或配置文件指定的名字空间下

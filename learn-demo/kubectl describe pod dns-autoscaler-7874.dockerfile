@@ -186,10 +186,33 @@ kubectl delete pod -n ssx ssx-sleuth-zipkin-dm-5987dfc664-9l7kq
 
 
 待部署的环境：
-1. elk
-2. ffmpeg
-3. kafka+zk 
-4. zipkin 
-5. node101安装buildkit
-6. 修改ssx项目的jenkins.groovy文件镜像构建方式
 7. 配置node101防火墙、防黑客侵入措施
+
+
+registry.docker-cn.com/wurstmeister/zookeeper:3.4.13
+
+
+
+
+/root/apps/buildkit.bin/buildctl build \
+ --build-arg JAR_PATH=/home/app/apps/k8s/for_docker_volume/jenkins/jars \
+ --frontend=dockerfile.v0 \
+    --local context=. \
+    --local dockerfile=./Dockerfile-format \
+    --output type=image,name=ssx.containerd.image/ssx-java-eureka12333:99
+
+
+docker.io/library/java:8-alpine
+rw4gxirw.mirror.aliyuncs.com/java:8-alpine
+
+
+# registry configures a new Docker register used for cache import or output.
+[registry."docker.io"]
+  # mirror configuration to handle path in case a mirror registry requires a /project path rather than just a host:port
+  mirrors = ["rw4gxirw.mirror.aliyuncs.com"]
+
+
+
+/root/apps/buildkit.bin/buildctl build --frontend=dockerfile.v0 --local context=/home/app/apps/k8s/for_docker_volume/jenkins/workspace/gitee_com_shenshuxin01_ssx-java-idea/admin-server/ \
+ --local dockerfile=/home/app/apps/k8s/for_docker_volume/jenkins/workspace/gitee_com_shenshuxin01_ssx-java-idea/admin-server/ \
+ --opt filename=Dockerfile-format--output type=image,name=node102:5000/ssx-java-admin-server:v20230718170635
