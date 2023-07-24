@@ -59,7 +59,7 @@ def set_bing_backgrounds():
     pic_context = pic.content
     # 将他拷贝到本地文件 w 写  b 二进制  wb代表写入二进制文本
     # 保存路径
-    path = g_path + cur_time + title.replace('?','？') + '.jpg'
+    path = g_path + cur_time + title.replace('?','？').replace('/','-').replace('\\','-') + '.jpg'
     with open(path, 'wb') as f:
         f.write(pic_context)
     logging.info("下载图片完成：" + path)
