@@ -125,3 +125,8 @@ curl \
 ```
 
 
+scp -r example_load_platform/ root@node101:/home/app/apps/k8s/for_docker_volume/homeassistant/config/custom_components
+
+# 删除history记录表
+sqlite> select * from states_meta where entity_id="sensor.node12cpumemsensor_sensor"; 
+sqlite> DELETE FROM states WHERE metadata_id=43; 
