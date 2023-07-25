@@ -24,3 +24,8 @@ code-1.79.0-1-x86_64.pkg.tar.zst
 $ sudo pacman -U ./code-1.79.0-1-x86_64.pkg.tar.zst
 
 ```
+
+# 配置电源选项自动熄屏
+进入/etc/systemd/logind.conf把
+LidSwitchIgnoreInhibited
+项反注释，把 yes 改成 no

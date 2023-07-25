@@ -219,6 +219,12 @@
 # clustrmaps
 - [clustrmaps](./detail_files/clustrmaps/clustrmaps-learn.md)
 
+# kde-plasma开发
+- [组件开发demo](https://develop.kde.org/docs/plasma/widget/c-api/)
+
+# archlinux
+- [电源](./detail_files/linux/archlinux-learn.md#配置电源选项自动熄屏)
+
 # untitled
 - [untitled基础](./detail_files/md#基础)
 
