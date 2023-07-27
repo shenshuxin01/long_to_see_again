@@ -20,7 +20,7 @@ docker run -d \
   -v /home/ssx/appdata/homeassisant/media/cdrom:/media/cdrom \
   ghcr.io/home-assistant/home-assistant:stable
 ```
-## 修改配置文件`configuration.yaml`
+## 修改配置文件`configuration.yaml` 仅参考，不是最新版本，新版本查看https://github.com/shenshuxin01/home-assisant-ssx-example-custom-config
 ```yaml
 # [ssx@archlinux config]$ cat /home/ssx/appdata/homeassisant/config/configuration.yaml 
 # Loads default set of integrations. Do not remove.
