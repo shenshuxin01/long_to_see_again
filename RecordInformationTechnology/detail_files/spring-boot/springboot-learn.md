@@ -26,7 +26,7 @@ management:
 ```
 ```sh
 # 查询日志级别
-curl http://localhost:8091/actuator/loggers/ssx.demo.specialarchlinuxprovider.controller.autorunscript.impl
+curl http://shenshuxin.tpddns.cn:10/gateway/actuator/loggers/ssx.demo.gatewayserver.config.sercurityconfig
 #{
 #     "configuredLevel": "INFO",
 #     "effectiveLevel": "INFO"
