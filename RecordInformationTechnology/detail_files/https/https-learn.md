@@ -80,6 +80,28 @@ acme.sh --install-cert -d example.com \
 2. 验证域名的所有权可以http方式可以dns方式，因为http我没有80端口号，但是dns方式我的域名是腾达路由器的免费二级域名，也不支持dns添加txt。所以不能进行域名所有权验证。
 3. 解决方案可以给宽带客服打电话开通80端口访问 或者使用花生壳域名支持添加dns的txt
 
+## 购买阿里云域名，然后通过dns解析认证并注册域名
+1. 购买网址： https://home.console.aliyun.com/home/dashboard/ProductAndService
+2. 设置dns解析为自己的公网ip
+3. 使用acme.sh认证域名所有权 
+`acme.sh --issue --dns -d shenshuxin.cn --yes-I-know-dns-manual-mode-enough-go-ahead-please`
+4. 把生成的TXT记录添加到阿里云域名DNS解析中
+5. 再次认证
+`acme.sh --renew -d shenshuxin.cn --yes-I-know-dns-manual-mode-enough-go-ahead-please`
+6. 生成密钥文件
+```sh
+acme.sh --install-cert -d shenshuxin.cn \
+--key-file       /etc/nginx/conf.d/acme/key.pem  \
+--fullchain-file /etc/nginx/conf.d/acme/cert.pem \
+--reloadcmd     "service nginx force-reload"
+```
+7. nginx配置
+```sh
+listen 443 ssl;
+server_name www.shenshuxin.cn;
+ssl_certificate /etc/nginx/conf.d/acme/cert.pem;
+ssl_certificate_key /etc/nginx/conf.d/acme/key.pem;
+```
 ---
 
 # nginx功能
