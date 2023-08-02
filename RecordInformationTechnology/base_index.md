@@ -228,8 +228,8 @@
 # untitled
 - [untitled基础](./detail_files/md#基础)
 
-# untitled
-- [untitled基础](./detail_files/md#基础)
+# istio
+- [istio部署](./detail_files/istio/istio-learn.md)
 
 # untitled
 - [untitled基础](./detail_files/md#基础)

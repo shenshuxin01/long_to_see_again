@@ -19,5 +19,18 @@ k8s集成istio ，springcloud注册中心使用istio，rpc使用grpc
 # springboot+gRPC
 - git@github.com:Pitayafruits/boot-grpc-sample.git
 - git@github.com:zhongyuanzhao000/gRPC-demo.git
+- git@github.com:shenshuxin01/grpc-springboot.git
+- git@gitee.com:shenshuxin01/python-script-202205.git
+
+
+
+
+
+
+
+
+
+
+
 
 
