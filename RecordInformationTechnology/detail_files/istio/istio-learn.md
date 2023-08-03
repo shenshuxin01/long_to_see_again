@@ -18,6 +18,9 @@ istioctl install --set profile=demo -y
 3. 给命名空间添加标签，指示 Istio 在部署应用的时候，自动注入 Envoy 边车代理：
 kubectl label namespace default istio-injection=enabled
 
+查看ns
+ kubectl get namespace -L istio-injection
+
 备份：
 [root@node101 ~]# kubectl get pod
 NAME                                 READY   STATUS    RESTARTS      AGE
@@ -68,6 +71,8 @@ istioctl dashboard kiali --address node101 --port 9988
 curl http://node101:9988
 
 
+7. 清理bookinfo
+samples/bookinfo/platform/kube/cleanup.sh
 
 
 
