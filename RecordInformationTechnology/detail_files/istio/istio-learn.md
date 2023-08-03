@@ -39,7 +39,7 @@ kubectl apply -f samples/bookinfo/networking/bookinfo-gateway.yaml
 
 kubectl get svc istio-ingressgateway -n istio-system
 
-
+没有配置LoadBalanceLoader支持，所以改成NodePort方式
 
 apiVersion: v1
 kind: Service
@@ -54,11 +54,20 @@ spec:
       targetPort: 9080
       nodePort: 30007
 
-
-
-
-
+验证
 curl http://node101:30007/productpage
+
+
+6. 添加可视化工具kiali
+kubectl apply -f samples/addons
+kubectl rollout status deployment/kiali -n istio-system
+
+istioctl dashboard kiali --address node101 --port 9988
+
+验证
+curl http://node101:9988
+
+
 
 
 

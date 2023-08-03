@@ -8,3 +8,49 @@
 
 # 安装kuboard可视化管理工具
 kubectl apply -f https://addons.kuboard.cn/kuboard/kuboard-v3-swr.yaml
+
+# 部署ingress
+## 部署ingress controller
+https://blog.csdn.net/m0_57776598/article/details/123978634
+
+## k8s和ingress-nginx版本
+https://github.com/kubernetes/ingress-nginx
+
+## k8s部署
+https://github.com/kubernetes/ingress-nginx/blob/controller-v1.1.1/deploy/static/provider/cloud/deploy.yaml
+### 替换国外镜像
+ctr -n k8s.io i pull registry.cn-hangzhou.aliyuncs.com/google_containers/nginx-ingress-controller:v1.1.1
+ctr -n k8s.io i pull registry.cn-hangzhou.aliyuncs.com/google_containers/kube-webhook-certgen:v1.1.1
+
+## 部署ingress资源
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-demo-ssx1
+  namespace: ssx
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: shenshuxin.cn
+      http:
+        paths:
+          - backend:
+              service:
+                name: ssx-elk-sv
+                port:
+                  number: 9011
+            path: /
+            pathType: Prefix
+    - host: hass.shenshuxin.cn
+      http:
+        paths:
+          - backend:
+              service:
+                name: ssx-homeassistant-dmsv
+                port:
+                  number: 9000
+            path: /
+            pathType: Prefix
+
+```
