@@ -74,7 +74,7 @@ curl http://node101:9988
 7. 清理bookinfo
 samples/bookinfo/platform/kube/cleanup.sh
 
-
-
+#### 测试container
+kubectl run mytool2 --image=docker.io/curlimages/curl sleep 100000
 
 
