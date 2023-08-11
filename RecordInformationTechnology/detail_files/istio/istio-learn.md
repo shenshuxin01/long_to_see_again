@@ -78,3 +78,50 @@ samples/bookinfo/platform/kube/cleanup.sh
 kubectl run mytool2 --image=docker.io/curlimages/curl sleep 100000
 
 
+# istio gateway使用demo
+kubectl apply -f - <<EOF
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: ngdemo-gateway
+  namespace: ssx
+spec:
+  selector:
+    istio: ingressgateway # use Istio default gateway implementation
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "tomcat.shenshuxin.cn"
+EOF
+
+
+
+kubectl apply -f - <<EOF
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: ngdemo-virtualservice
+  namespace: ssx
+spec:
+  hosts:
+  - "tomcat.shenshuxin.cn"
+  gateways:
+  - ngdemo-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /v1
+    route:
+    - destination:
+        port:
+          number: 9011
+        host: ssx-elk-sv
+  - route:
+    - destination:
+        port:
+          number: 9000
+        host: ssx-homeassistant-dmsv
+EOF
