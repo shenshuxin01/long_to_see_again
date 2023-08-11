@@ -98,7 +98,6 @@ spec:
 EOF
 
 
-
 kubectl apply -f - <<EOF
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -117,11 +116,11 @@ spec:
     route:
     - destination:
         port:
-          number: 9011
-        host: ssx-elk-sv
+          number: 8082
+        host: demo-tomcat-for-ingress-name
   - route:
     - destination:
         port:
-          number: 9000
-        host: ssx-homeassistant-dmsv
+          number: 8081
+        host: demo-tomcat-for-ingress-name
 EOF

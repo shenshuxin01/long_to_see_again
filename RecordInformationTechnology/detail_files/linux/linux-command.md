@@ -143,3 +143,7 @@ no crontab for root
 ```
 
 
+# sed命令
+
+sed 's/要被取代的字串/新的字串/g'
+
