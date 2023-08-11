@@ -128,3 +128,88 @@ EOF
 curl -HHost:tomcat.shenshuxin.cn "http://node101:32318"
 端口号是ingressgateway服务的nodeport
 
+
+
+# istio部署测试服务之间的调用通信
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: demo-tomcat-for-istio-lb1
+  name: demo-tomcat-for-istio-name1
+  namespace: ssx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-tomcat-for-istio-lb1
+  template:
+    metadata:
+      labels:
+        app: demo-tomcat-for-istio-lb1
+    spec:
+      containers:
+      - image: docker.io/library/tomcat:8
+        name: demo-tomcat-c
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: demo-tomcat-for-istio-lb1
+  name: demo-tomcat-for-istio-name1
+  namespace: ssx
+spec:
+  ports:
+  - name: tomcat8080
+    port: 8081
+    targetPort: 8080
+  selector:
+    app: demo-tomcat-for-istio-lb1
+  type: ClusterIP
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: demo-tomcat-for-istio-lb2
+  name: demo-tomcat-for-istio-name2
+  namespace: ssx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-tomcat-for-istio-lb2
+  template:
+    metadata:
+      labels:
+        app: demo-tomcat-for-istio-lb2
+    spec:
+      containers:
+      - image: docker.io/library/tomcat:8
+        name: demo-tomcat-c
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: demo-tomcat-for-istio-lb2
+  name: demo-tomcat-for-istio-name2
+  namespace: ssx
+spec:
+  ports:
+  - name: tomcat8080
+    port: 8081
+    targetPort: 8080
+  selector:
+    app: demo-tomcat-for-istio-lb2
+  type: ClusterIP
+
+
+```

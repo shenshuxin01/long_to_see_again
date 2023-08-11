@@ -18,7 +18,7 @@ https://blog.csdn.net/m0_57776598/article/details/123978634
 ## k8s和ingress-nginx版本
 https://github.com/kubernetes/ingress-nginx
 
-## k8s部署
+## k8s部署ingress-nginx
 https://github.com/kubernetes/ingress-nginx/blob/controller-v1.1.1/deploy/static/provider/cloud/deploy.yaml
 ### 替换国外镜像
 ctr -n k8s.io i pull registry.cn-hangzhou.aliyuncs.com/google_containers/nginx-ingress-controller:v1.1.1
