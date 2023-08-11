@@ -124,3 +124,7 @@ spec:
           number: 8081
         host: demo-tomcat-for-ingress-name
 EOF
+
+curl -HHost:tomcat.shenshuxin.cn "http://node101:32318"
+端口号是ingressgateway服务的nodeport
+
