@@ -131,85 +131,146 @@ curl -HHost:tomcat.shenshuxin.cn "http://node101:32318"
 
 
 # istio部署测试服务之间的调用通信
+## 部署两个tomcat服务pod并且配置serivce服务
+注意部署的两个deployment需要指定一下版本标签`version: ??`
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    app: demo-tomcat-for-istio-lb1
   name: demo-tomcat-for-istio-name1
   namespace: ssx
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: demo-tomcat-for-istio-lb1
+      app: demo-tomcat-for-istio-dm
   template:
     metadata:
       labels:
-        app: demo-tomcat-for-istio-lb1
+        app: demo-tomcat-for-istio-dm
+        version: vv11
     spec:
       containers:
-      - image: docker.io/library/tomcat:8
-        name: demo-tomcat-c
-        ports:
-        - containerPort: 8080
----
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    app: demo-tomcat-for-istio-lb1
-  name: demo-tomcat-for-istio-name1
-  namespace: ssx
-spec:
-  ports:
-  - name: tomcat8080
-    port: 8081
-    targetPort: 8080
-  selector:
-    app: demo-tomcat-for-istio-lb1
-  type: ClusterIP
+          - image: 'docker.io/library/tomcat:8'
+            imagePullPolicy: IfNotPresent
+            name: demo-tomcat-c
+            ports:
+              - containerPort: 8080
 
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    app: demo-tomcat-for-istio-lb2
   name: demo-tomcat-for-istio-name2
   namespace: ssx
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: demo-tomcat-for-istio-lb2
+      app: demo-tomcat-for-istio-dm
   template:
     metadata:
       labels:
-        app: demo-tomcat-for-istio-lb2
+        app: demo-tomcat-for-istio-dm
+        version: vv22
     spec:
       containers:
-      - image: docker.io/library/tomcat:8
-        name: demo-tomcat-c
-        ports:
-        - containerPort: 8080
+          - image: 'docker.io/library/tomcat:8'
+            imagePullPolicy: IfNotPresent
+            name: demo-tomcat-c
+            ports:
+              - containerPort: 8080
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: demo-tomcat-for-istio-lb2
-  name: demo-tomcat-for-istio-name2
+    app: demo-tomcat-for-istio-sv-lb
+  name: demo-tomcat-for-istio-name
   namespace: ssx
 spec:
   ports:
-  - name: tomcat8080
-    port: 8081
-    targetPort: 8080
+    - name: tomcat8080
+      port: 8081
+      protocol: TCP
+      targetPort: 8080
   selector:
-    app: demo-tomcat-for-istio-lb2
+    app: demo-tomcat-for-istio-dm
   type: ClusterIP
 
-
 ```
+
+## 通过istio的虚拟服务进行流量管理
+注意这里的hosts名称(demo-tomcat-for-istio-name)要和上面的service配置的一致，这样istio才可以进行流量管理。
+这里设置了请求转发策略，并且设置自定义响应头
+```yaml
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: demo-tomcat-istio-vs
+  namespace: ssx
+spec:
+  hosts:
+    - demo-tomcat-for-istio-name
+  http:
+    - headers:
+        request:
+          set:
+            test: "true"
+      route:
+        - destination:
+            host: demo-tomcat-for-istio-name
+            subset: vv11
+          weight: 10
+          headers:
+            response:
+              set:
+                ssxppp: abc
+        - destination:
+            host: demo-tomcat-for-istio-name
+            subset: vv22
+          headers:
+            response:
+              set:
+                ssxppp: 123
+          weight: 90
+
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: demo-tomcat-istio-dr
+  namespace: ssx
+spec:
+  host: demo-tomcat-for-istio-name
+  subsets:
+    - name: vv11
+      labels:
+        version: vv11
+    - name: vv22
+      labels:
+        version: vv22
+```
+## 验证
+随便找一个集群中的通过istio代理的服务，执行curl命令：
+```bash
+# curl -I demo-tomcat-for-istio-name.ssx:8081
+HTTP/1.1 200 OK
+accept-ranges: bytes
+etag: W/"8-1691939281480"
+last-modified: Sun, 13 Aug 2023 15:08:01 GMT
+content-type: text/html
+content-length: 8
+date: Tue, 15 Aug 2023 00:54:15 GMT
+x-envoy-upstream-service-time: 2
+server: envoy
+ssxppp: fs
+```
+调用的方式是service名称.命名空间名称:端口号。
+`curl -I`命令是只显示响应头
+
+
+
+

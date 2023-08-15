@@ -26,7 +26,7 @@ management:
 ```
 ```sh
 # 查询日志级别
-curl http://shenshuxin.tpddns.cn:10/gateway/actuator/loggers/ssx.demo.gatewayserver.config.sercurityconfig
+curl http://node101:30501/actuator/loggers/ssx.demo.gatewayserver.config.sercurityconfig
 #{
 #     "configuredLevel": "INFO",
 #     "effectiveLevel": "INFO"
