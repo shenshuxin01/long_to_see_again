@@ -19,7 +19,9 @@ istioctl install --set profile=demo -y
 kubectl label namespace ssx istio-injection=enabled
 
 查看ns
- kubectl get namespace -L istio-injection
+kubectl get namespace -L istio-injection
+kubectl label namespace ssx istio-injection=disabled
+kubectl label namespace ssx istio-injection=disabled --overwrite
 
 备份：
 [root@node101 ~]# kubectl get pod
@@ -273,4 +275,8 @@ ssxppp: fs
 
 
 
+# istio手动注入sidecar
+kubectl apply -f <(/root/apps/istio1.17/istio-1.17.5/bin/istioctl kube-inject -f xxx.yaml)
 
+# istio整合springcloud+grpc
+git@github.com:shenshuxin01/grpc-springboot.git
