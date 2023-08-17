@@ -147,3 +147,5 @@ no crontab for root
 
 sed 's/要被取代的字串/新的字串/g'
 
+# 命令行循环
+for i in {0..100};do curl -I "http://web-base:8083/test1?name=fffppp";done

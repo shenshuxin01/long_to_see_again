@@ -67,7 +67,7 @@ curl http://node101:30007/productpage
 kubectl apply -f samples/addons
 kubectl rollout status deployment/kiali -n istio-system
 
-istioctl dashboard kiali --address node101 --port 9988
+istioctl dashboard kiali --address 192.168.0.101 --port 9988
 
 验证
 curl http://node101:9988
@@ -279,4 +279,7 @@ ssxppp: fs
 kubectl apply -f <(/root/apps/istio1.17/istio-1.17.5/bin/istioctl kube-inject -f xxx.yaml)
 
 # istio整合springcloud+grpc
-git@github.com:shenshuxin01/grpc-springboot.git
+git clone -b dev-istio git@github.com:shenshuxin01/grpc-springboot.git
+
+
+
