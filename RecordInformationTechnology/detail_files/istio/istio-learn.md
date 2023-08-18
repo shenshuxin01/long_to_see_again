@@ -293,10 +293,9 @@ data:
       envoyExtAuthzHttp:
         service: "ssx-java-web-sv.ssx.svc.cluster.local"
         port: "9001"
-        includeRequestHeadersInCheck: ["Authorization"]
+        includeRequestHeadersInCheck: ["Authorization","whoFlag"]
 
 curl -I -H "Authorization: aaa" -H "whoFlag: aaa" "http://ssx-java-web-sv.ssx.svc.cluster.local:9001/sssssss" 
-
 
 # 启用外部授权
 kubectl apply -n ssx -f - <<EOF
@@ -323,9 +322,6 @@ EOF
 
 ## 验证istio外部授权
 ```sh
-curl -I -H "Authorization: aaa"  -H "whoFlag: aaa" "http://web-base:8083/test1?name=fffppp" 
-
-
 #未开启授权 curl -I "http://web-base.ssx:8083/test1?name=fffppp"
 HTTP/1.1 200 OK
 content-type: text/plain;charset=UTF-8
@@ -335,8 +331,9 @@ x-envoy-upstream-service-time: 27
 server: envoy
 ssxppp: ffffffyyyyyyy-internall
 
-#开启授权 curl -I -H "Authorization: aaa" -H "whoFlag: aaa" "http://web-base.ssx:8083/test1?name=fffppp"
-HTTP/1.1 404 Not Found
+#开启授权; 错误的jwt
+#curl -I -H "Authorization: aaa" -H "whoFlag: aaa" "http://web-base.ssx:8083/test1?name=fffppp"
+HTTP/1.1 401 Unauthorized
 cache-control: no-cache, no-store, max-age=0, must-revalidate
 pragma: no-cache
 expires: 0
@@ -344,11 +341,21 @@ x-content-type-options: nosniff
 x-frame-options: DENY
 x-xss-protection: 1 ; mode=block
 referrer-policy: no-referrer
-x-envoy-upstream-service-time: 8
-date: Fri, 18 Aug 2023 05:36:40 GMT
+x-envoy-upstream-service-time: 7
+date: Fri, 18 Aug 2023 07:42:05 GMT
 server: envoy
 ssxppp: ffffffyyyyyyy-internall
 transfer-encoding: chunked
+
+#开启授权; 正确的jwt
+#curl -I -H "Authorization: 正确的jwt" -H "whoFlag: aaa" "http://web-base.ssx:8083/test1?name=fffppp"
+HTTP/1.1 200 OK
+content-type: text/plain;charset=UTF-8
+content-length: 14
+date: Fri, 18 Aug 2023 07:42:41 GMT
+x-envoy-upstream-service-time: 161
+server: envoy
+ssxppp: ffffffyyyyyyy-internall
 
 
 ```
