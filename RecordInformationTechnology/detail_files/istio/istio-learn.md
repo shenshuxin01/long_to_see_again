@@ -293,7 +293,7 @@ data:
       envoyExtAuthzHttp:
         service: "ssx-java-web-sv.ssx.svc.cluster.local"
         port: "9001"
-        includeRequestHeadersInCheck: ["Authorization","whoFlag"]
+        includeRequestHeadersInCheck: ["Authorization","whoFlag","Cookie"]
 
 curl -I -H "Authorization: aaa" -H "whoFlag: aaa" "http://ssx-java-web-sv.ssx.svc.cluster.local:9001/sssssss" 
 
