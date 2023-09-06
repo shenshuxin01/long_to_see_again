@@ -23,8 +23,8 @@ show global status like 'Max_used_connections';
 show global variables like 'wait_timeout'; 
 
 -- 调试 避免too many connect
-set GLOBAL max_connections=1000; 
-set global wait_timeout=300; 
+set GLOBAL max_connections=3000; 
+set global wait_timeout=60; 
 ```
 
 # postgres10版本，匿名函数+二维数组使用
