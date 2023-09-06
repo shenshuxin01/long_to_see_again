@@ -34,19 +34,19 @@ ingress-nginx-controller             NodePort    10.233.133.76    <none>        
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ingress-demo-ssx1
+  name: ingress-demo-tomcat-for-ingress-name
   namespace: ssx
 spec:
   ingressClassName: nginx
   rules:
-    - host: shenshuxin.cn
+    - host: tomcat.shenshuxin.cn
       http:
         paths:
           - backend:
               service:
-                name: ssx-elk-sv
+                name: demo-tomcat-for-ingress-name
                 port:
-                  number: 9011
+                  number: 8081
             path: /
             pathType: Prefix
 ```
