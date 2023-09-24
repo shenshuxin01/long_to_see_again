@@ -103,7 +103,7 @@ acme.sh --install-cert -d example.com \
 
 6. 生成密钥文件
 ```sh
-acme.sh --install-cert -d *.shenshuxin.cn  \
+acme.sh --install-cert -d  shenshuxin.cn  \
 --key-file       /home/ssx/apps/subacme/key.pem  \
 --fullchain-file /home/ssx/apps/subacme/cert.pem 
 ```
