@@ -6,6 +6,12 @@
 3. 查询历史版本`kubectl rollout history  xxxdelpementnaem`
 4. 注意一定要真正的修改了配置才会生效，比如更新了jar版本，相应的docker镜像版本需要更新
 
+# k8s部署pod报错
+```sh
+ctr -n k8s.io i pull registry.aliyuncs.com/k8sxio/pause:3.6 &&\
+ctr -n k8s.io i tag   registry.aliyuncs.com/k8sxio/pause:3.6 k8s.gcr.io/pause:3.6
+```
+
 # 安装kuboard可视化管理工具
 kubectl apply -f https://addons.kuboard.cn/kuboard/kuboard-v3-swr.yaml
 
@@ -34,19 +40,19 @@ ingress-nginx-controller             NodePort    10.233.133.76    <none>        
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ingress-demo-ssx1
+  name: ingress-demo-tomcat-for-ingress-name
   namespace: ssx
 spec:
   ingressClassName: nginx
   rules:
-    - host: shenshuxin.cn
+    - host: tomcat.shenshuxin.cn
       http:
         paths:
           - backend:
               service:
-                name: ssx-elk-sv
+                name: demo-tomcat-for-ingress-name
                 port:
-                  number: 9011
+                  number: 8081
             path: /
             pathType: Prefix
 ```
