@@ -359,3 +359,38 @@ ssxppp: ffffffyyyyyyy-internall
 
 
 ```
+
+
+# istio gateway使用https配置
+1. 使用acmesh创建域名和二级域名证书,把生成的文件保存到/root/appdata/subacme
+2. 生成k8s secert信息,这里的名字为【tls-sub-shenshuxin.cn-secert】
+```sh
+kubectl create -n istio-system secret tls tls-sub-shenshuxin-cn-secert \
+  --key=/root/appdata/subacme/shenshuxin.cn.key \
+  --cert=/root/appdata/subacme/shenshuxin.cn.cer
+```
+3. 验证创建成功
+`kubectl get secrets -n istio-system`
+4. 创建istio gateway
+```yaml
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: xxx-gateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - hosts:
+        - shenshuxin.cn
+        - xx1.shenshuxin.cn
+        - xx2.shenshuxin.cn
+      port:
+        name: https
+        number: 443
+        protocol: HTTPS
+      tls:
+        credentialName: tls-sub-shenshuxin-cn-secert
+        mode: SIMPLE
+
+```

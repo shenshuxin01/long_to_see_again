@@ -81,20 +81,33 @@ acme.sh --install-cert -d example.com \
 3. 解决方案可以给宽带客服打电话开通80端口访问 或者使用花生壳域名支持添加dns的txt
 
 ## 购买阿里云域名，然后通过dns解析认证并注册域名
+[参考网址](https://blog.csdn.net/yedajiang44/article/details/121173526)
+
 1. 购买网址： https://home.console.aliyun.com/home/dashboard/ProductAndService
 2. 设置dns解析为自己的公网ip
+  - 新增阿里访问控制配置权限并且添加到本地环境变量
+    export Ali_Key="xxx"
+    export Ali_Secret="xxxxx"
+
 3. 使用acme.sh认证域名所有权 
-`acme.sh --issue --dns -d shenshuxin.cn --yes-I-know-dns-manual-mode-enough-go-ahead-please`
+`acme.sh --force --issue --dns dns_ali -d shenshuxin.cn -d *.shenshuxin.cn --yes-I-know-dns-manual-mode-enough-go-ahead-please`
+
+成功后
+ Your cert is in: /home/ssx/.acme.sh/shenshuxin.cn/shenshuxin.cn.cer
+ Your cert key is in: /home/ssx/.acme.sh/shenshuxin.cn/shenshuxin.cn.key
+后续步骤忽略
+
 4. 把生成的TXT记录添加到阿里云域名DNS解析中
 5. 再次认证
-`acme.sh --renew -d shenshuxin.cn --yes-I-know-dns-manual-mode-enough-go-ahead-please`
+`acme.sh --renew  -d shenshuxin.cn --yes-I-know-dns-manual-mode-enough-go-ahead-please`
+
 6. 生成密钥文件
 ```sh
-acme.sh --install-cert -d shenshuxin.cn \
---key-file       /etc/nginx/conf.d/acme/key.pem  \
---fullchain-file /etc/nginx/conf.d/acme/cert.pem \
---reloadcmd     "service nginx force-reload"
+acme.sh --install-cert -d *.shenshuxin.cn  \
+--key-file       /home/ssx/apps/subacme/key.pem  \
+--fullchain-file /home/ssx/apps/subacme/cert.pem 
 ```
+
 7. nginx配置
 ```sh
 listen 443 ssl;
