@@ -8,8 +8,7 @@
 
 # k8s部署pod报错
 ```sh
-ctr -n k8s.io i pull registry.aliyuncs.com/k8sxio/pause:3.6 &&\
-ctr -n k8s.io i tag   registry.aliyuncs.com/k8sxio/pause:3.6 k8s.gcr.io/pause:3.6
+ctr -n k8s.io i pull registry.aliyuncs.com/k8sxio/pause:3.6 && ctr -n k8s.io i tag   registry.aliyuncs.com/k8sxio/pause:3.6 k8s.gcr.io/pause:3.6
 ```
 
 # 安装kuboard可视化管理工具
