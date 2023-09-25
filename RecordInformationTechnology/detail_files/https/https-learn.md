@@ -92,16 +92,7 @@ acme.sh --install-cert -d example.com \
 3. 使用acme.sh认证域名所有权 
 `acme.sh --force --issue --dns dns_ali -d shenshuxin.cn -d *.shenshuxin.cn --yes-I-know-dns-manual-mode-enough-go-ahead-please`
 
-成功后
- Your cert is in: /home/ssx/.acme.sh/shenshuxin.cn/shenshuxin.cn.cer
- Your cert key is in: /home/ssx/.acme.sh/shenshuxin.cn/shenshuxin.cn.key
-后续步骤忽略
-
-4. 把生成的TXT记录添加到阿里云域名DNS解析中
-5. 再次认证
-`acme.sh --renew  -d shenshuxin.cn --yes-I-know-dns-manual-mode-enough-go-ahead-please`
-
-6. 生成密钥文件
+4. 生成密钥文件
 ```sh
 acme.sh --install-cert -d  shenshuxin.cn  \
 --key-file       /home/ssx/apps/subacme/key.pem  \
@@ -112,8 +103,8 @@ acme.sh --install-cert -d  shenshuxin.cn  \
 ```sh
 listen 443 ssl;
 server_name www.shenshuxin.cn;
-ssl_certificate /etc/nginx/conf.d/acme/cert.pem;
-ssl_certificate_key /etc/nginx/conf.d/acme/key.pem;
+ssl_certificate /home/ssx/apps/subacme/cert.pem ;
+ssl_certificate_key /home/ssx/apps/subacme/key.pem;
 ```
 ---
 
