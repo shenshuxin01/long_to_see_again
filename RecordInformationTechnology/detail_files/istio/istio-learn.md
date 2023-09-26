@@ -314,9 +314,10 @@ spec:
     name: sample-ext-authz-http
   rules:
   # 规则指定何时触发外部授权器。
-  - to:
-    - operation:
-        hosts: ["*.shenshuxin.cn", "shenshuxin.cn"]
+    - to:
+        - operation:
+            hosts:
+              - 'grpcdemo.shenshuxin.cn:30080'
 
 EOF
 ```
