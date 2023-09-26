@@ -316,7 +316,6 @@ spec:
   # 规则指定何时触发外部授权器。
   - to:
     - operation:
-        paths: ["/test1"]
         hosts: ["*.shenshuxin.cn", "shenshuxin.cn"]
 
 EOF
