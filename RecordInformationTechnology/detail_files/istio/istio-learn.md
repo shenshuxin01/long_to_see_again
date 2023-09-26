@@ -317,6 +317,8 @@ spec:
   - to:
     - operation:
         paths: ["/test1"]
+        hosts: ["*.shenshuxin.cn", "shenshuxin.cn"]
+
 EOF
 ```
 
