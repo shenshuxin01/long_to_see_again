@@ -131,4 +131,40 @@ spec:
 curl http://tomcat.shenshuxin.cn:部署的ingress-nginx的service的NodePort（这里是32031）
 
 
+# k8s生成secret
+```sh
+kubectl create -n ssx secret tls tls-sub-shenshuxin-cn-secert \
+  --key=./key.pem \
+  --cert=./cert.pem
+```
 
+# ingress配置外部授权auth进行鉴权,配置一个`auth-url`即可
+参考 https://kubernetes.github.io/ingress-nginx/examples/auth/external-auth/
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-demo-tomcat-for-ingress-name
+  namespace: ssx
+  annotations:
+    nginx.ingress.kubernetes.io/auth-url: https://oauth2.shenshuxin.cn:30443/checkAdmin
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: shenshuxin.cn
+      http:
+        paths:
+          - backend:
+              service:
+                name: demo-tomcat-for-ingress-name
+                port:
+                  number: 8081
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - shenshuxin.cn
+      secretName: acmen-for-k8s-secret
+
+```
