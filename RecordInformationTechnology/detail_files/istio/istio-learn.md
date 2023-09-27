@@ -367,7 +367,7 @@ ssxppp: ffffffyyyyyyy-internall
 1. 使用acmesh创建域名和二级域名证书,把生成的文件保存到/root/appdata/subacme
 2. 生成k8s secert信息,这里的名字为【tls-sub-shenshuxin.cn-secert】
 ```sh
-kubectl create -n istio-system secret tls tls-sub-shenshuxin-cn-secert3 \
+kubectl create -n istio-system secret tls tls-sub-shenshuxin-cn-secert \
   --key=./key.pem \
   --cert=./cert.pem
 ```
