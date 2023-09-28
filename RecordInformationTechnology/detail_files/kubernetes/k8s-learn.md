@@ -168,3 +168,16 @@ spec:
       secretName: acmen-for-k8s-secret
 
 ```
+
+# ingress-nginx配置自定义错误页面
+* https://kubernetes.github.io/ingress-nginx/user-guide/custom-errors/
+* https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#custom-http-errors
+```sh
+# 配置ingress-nginx-controller的Deployment命令行启动新增参数，这个服务名字是我的oauth2服务8080端
+containers.args = '--default-backend-service=ssx/oauth2-istio-dmsv'
+# 配置namespace: ingress-nginx的ConfigMap新增值
+custom-http-errors: '403,401'
+```
+
+
+
