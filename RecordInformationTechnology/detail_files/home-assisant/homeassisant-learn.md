@@ -152,8 +152,45 @@ sqlite> DELETE FROM states WHERE metadata_id=43;
     trusted_proxies:
       - 10.234.105.88
   ```
-
-
+- 配置ingress-nginx-contoller的configMap
+  ```yaml
+  kind: ConfigMap
+  data:
+    allow-snippet-annotations: 'true'
+  ```
+- 新增ingress-hass
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/auth-url: 'https://oauth2.shenshuxin.cn:30443/checkAdmin'
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      sub_filter '<head>' '<head><script>window.externalApp={getExternalAuth:function(){window.externalAuthSetToken(true,{"access_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJkYjM3NWQ1Y2RlZTc0NzBlODc3YzA0ZGE0ZjJiNDdiMiIsImlhdCI6MTY5MDQ5NzU3OSwiZXhwIjoyMDA1ODU3NTc5fQ.xgll212fYbTYj1yEsQ2jtwpWh9Bz7lhOKBZSh3wG6Gs","expires_in":248832000});},revokeExternalAuth:function(){window.externalAuthRevokeToken(false);}};</script>';
+      sub_filter_once on;
+      location /auth/authorize {
+        return 301 /?external_auth=1;
+      }
+  name: hass-ingress
+  namespace: ssx
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: hass.shenshuxin.cn
+      http:
+        paths:
+          - backend:
+              service:
+                name: ssx-homeassistant-dmsv
+                port:
+                  number: 9000
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - hass.shenshuxin.cn
+      secretName: tls-sub-shenshuxin-cn-secert
+```
 
 
 
