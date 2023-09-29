@@ -132,3 +132,35 @@ scp secrets.yaml root@node101:/home/app/apps/k8s/for_docker_volume/homeassistant
 # 删除history记录表
 sqlite> select * from states_meta where entity_id="sensor.node12cpumemsensor_sensor"; 
 sqlite> DELETE FROM states WHERE metadata_id=43; 
+
+
+# 使用k8s-ingress方式配置域名访问后端hass
+- 域名： hass.shenshuxin.cn
+- 修改ingress-nginx-controller的deployment文件：
+  ```yaml
+  kind: Deployment
+  spec:
+    template: 
+      metadata: 
+        annotations:
+          "cni.projectcalico.org/ipAddrs": "[\"10.234.105.88\"]" #指定容器pod的地址，如果多个容器使用ipV4pools?参数
+  ```
+- 配置hass的config目录下的配置文件configuration.yaml
+  ```yaml
+  http:
+    use_x_forwarded_for: true
+    trusted_proxies:
+      - 10.234.105.88
+  ```
+
+
+
+
+
+
+
+
+
+
+
+
