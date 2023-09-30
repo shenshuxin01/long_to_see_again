@@ -319,6 +319,18 @@ spec:
             hosts:
               - 'grpcdemo.shenshuxin.cn:30080'
 
+---
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: deny-path-actuator
+  namespace: ssx
+spec:
+  action: DENY
+  rules:
+  - to:
+    - operation:
+        paths: ["/actuator*"]   # 禁止所有actuator开头的路径，在生产网关禁用，只允许本地调用 
 EOF
 ```
 
