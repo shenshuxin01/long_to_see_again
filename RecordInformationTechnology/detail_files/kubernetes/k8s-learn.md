@@ -7,8 +7,46 @@
 4. 注意一定要真正的修改了配置才会生效，比如更新了jar版本，相应的docker镜像版本需要更新
 
 # k8s部署pod报错
-```sh
-ctr -n k8s.io i pull registry.aliyuncs.com/k8sxio/pause:3.6 && ctr -n k8s.io i tag   registry.aliyuncs.com/k8sxio/pause:3.6 k8s.gcr.io/pause:3.6
+https://cloud.tencent.com/developer/article/1868092
+```yaml
+#  ctr -n k8s.io i pull registry.aliyuncs.com/k8sxio/pause:3.6 && ctr -n k8s.io i tag   registry.aliyuncs.com/k8sxio/pause:3.6 k8s.gcr.io/pause:3.6
+
+version = 2
+root = "/var/lib/containerd"
+state = "/run/containerd"
+oom_score = 0
+
+[grpc]
+  max_recv_message_size = 16777216
+  max_send_message_size = 16777216
+
+[debug]
+  level = "info"
+
+[metrics]
+  address = ""
+  grpc_histogram = false
+
+[plugins]
+  [plugins."io.containerd.grpc.v1.cri"]
+    sandbox_image = "registry.aliyuncs.com/k8sxio/pause:3.6"
+    max_container_log_line_size = -1
+    [plugins."io.containerd.grpc.v1.cri".containerd]
+      default_runtime_name = "runc"
+      snapshotter = "overlayfs"
+      [plugins."io.containerd.grpc.v1.cri".containerd.runtimes]
+        [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+          runtime_type = "io.containerd.runc.v2"
+          runtime_engine = ""
+          runtime_root = ""
+          [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+            systemdCgroup = true
+    [plugins."io.containerd.grpc.v1.cri".registry]
+      [plugins."io.containerd.grpc.v1.cri".registry.mirrors]
+        [plugins."io.containerd.grpc.v1.cri".registry.mirrors."docker.io"]
+          endpoint = ["https://bqr1dr1n.mirror.aliyuncs.com"]
+        [plugins."io.containerd.grpc.v1.cri".registry.mirrors."k8s.gcr.io"]
+          endpoint = ["https://registry.aliyuncs.com/k8sxio"]
 ```
 
 # 安装kuboard可视化管理工具

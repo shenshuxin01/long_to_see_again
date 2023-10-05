@@ -8,8 +8,8 @@ ctr -n k8s.io images ls
 
 
 # 创建jdk21镜像
-1. 下载java21解压版本,删除rz.zip等文件
-2. 跳转到压缩包路径并确保包名是jdk-21_linux-x64_bin.tar.gz，然后生成下面的Dockerfile
+1. 下载java21解压版本,删除rz.zip等文件,解压命名目录为jdk-21
+2. 生成下面的Dockerfile
 ```sh
 cat > Dockerfile <<EOF
 FROM daocloud.io/centos:7
