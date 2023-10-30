@@ -99,28 +99,28 @@ data:
 <!-- -H "Authorization: Bearer <ACCESS TOKEN>" -->
 ```sh
 curl \
-  -H "Authorization: Bearer YOUR-TOKEN" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI5OTE3Y2Y0MDE5MDM0MTQwOGE3ZDhhNDNhZmQ0ZDMyZSIsImlhdCI6MTY5NzI4MjU0NSwiZXhwIjoyMDEyNjQyNTQ1fQ.p-Tn2zcv1P_gHxJzATZpxm-vo83rmi9avQds7NgaR8k" \
   -H "Content-Type: application/json" \
-  http://shenshuxin.tpddns.cn:31/api/services
+  http://ssx-homeassistant-dmsv.ssx:9000/api/services
 ```
 
 ## 调用服务实例，例如改变switch的状态关开
 ```sh
 curl \
-  -H "Authorization: Bearer YOUR-TOKEN" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI5OTE3Y2Y0MDE5MDM0MTQwOGE3ZDhhNDNhZmQ0ZDMyZSIsImlhdCI6MTY5NzI4MjU0NSwiZXhwIjoyMDEyNjQyNTQ1fQ.p-Tn2zcv1P_gHxJzATZpxm-vo83rmi9avQds7NgaR8k" \
   -H "Content-Type: application/json" \
   -d '{"entity_id": "switch.example_load_platform_ssxswitchentity_attr_unique_id"}' \
-  http://shenshuxin.tpddns.cn:31/api/services/switch/toggle
+  http://ssx-homeassistant-dmsv.ssx:9000/api/services/switch/toggle
 
 ```
 
 ## 调用服务实例，例如播放语音到homepodmini
 ```sh
 curl \
-  -H "Authorization: Bearer YOUR-TOKEN" \
-  -H "Content-Type: application/json;charset=GBK" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI5OTE3Y2Y0MDE5MDM0MTQwOGE3ZDhhNDNhZmQ0ZDMyZSIsImlhdCI6MTY5NzI4MjU0NSwiZXhwIjoyMDEyNjQyNTQ1fQ.p-Tn2zcv1P_gHxJzATZpxm-vo83rmi9avQds7NgaR8k" \
+  -H "Content-Type: application/json;charset=UTF-8" \
   -d '{"entity_id": "media_player.ke_fang","message": "能听到吗","cache": true}' \
-  http://shenshuxin.tpddns.cn:31/api/services/tts/xiaomo_say
+  http://ssx-homeassistant-dmsv.ssx:9000/api/services/tts/xiaomo_say
 
 ```
 
