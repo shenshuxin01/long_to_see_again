@@ -18,6 +18,7 @@ show variables like '%max_connections%';
 
 -- 查看实时连接数
 show global status like 'Max_used_connections';
+SHOW STATUS LIKE 'Threads_connected';
 
 -- 这个数值指的是mysql在关闭一个非交互的连接之前要等待的秒数
 show global variables like 'wait_timeout'; 
