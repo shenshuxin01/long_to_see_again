@@ -130,6 +130,14 @@ error_page 401 =301 http://shenshuxin.tpddns.cn:10?rewriteUrl=${http_host}${requ
 http://shenshuxin.tpddns.cn:10?rewriteUrl=shenshuxin.tpddns.cn:81/?aaaaa=1234
 
 
+# squid
+acl denyWeb dstdomain .feishu.cn
+acl denyWeb2 dstdomain ^http(s)?://(.*)baidu.com/.*jjjggg.*$
+
+http_access deny denyWeb
+http_access deny denyWeb2
+
+http_access allow all
 
 
 
