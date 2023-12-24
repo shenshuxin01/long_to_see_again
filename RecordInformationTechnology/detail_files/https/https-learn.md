@@ -47,65 +47,57 @@ HTTPS：简单讲是HTTP的安全版，在HTTP下加入SSL层，HTTPS的安全�
 # acmesh方式部署https
 ## 1. 前提条件
 - acmesh官网：https://github.com/acmesh-official/acme.sh/wiki/%E8%AF%B4%E6%98%8E
-- 已有http网站并且是nginx部署的
 
 ## 2. 原理
 先验证域名的所有权，验证成功之后直接安装证书。
 
 ## 3. 因为官网有中文的安装文档，下面是记录具体的执行步骤
 ```sh
-cd apps/acmesh
-
 # 下载安装
-curl https://get.acme.sh | sh -s email=ssx17852015601@163.com
+git clone https://gitee.com/neilpang/acme.sh.git
+cd acme.sh
+./acme.sh --install -m ssx17852015601@163.com
+
 # 成功会打印 [Fri Mar 31 10:26:32 CST 2023] Install success!
-
 cd ~/.acme.sh/
-
 alias acme.sh=~/.acme.sh/acme.sh
 
-#配置下nginx的环境变量 vim ~/.bash_profile +$PATH
+# 购买阿里云域名，然后通过dns解析认证并注册域名
+##[参考网址](https://blog.csdn.net/yedajiang44/article/details/121173526)
+#
+#1. 购买网址： https://home.console.aliyun.com/home/dashboard/ProductAndService
+# 设置dns解析为自己的公网ip 新增阿里访问控制配置权限并且添加到本地环境变量
+export Ali_Key="xxx"
+export Ali_Secret="xxx"
 
-# 认证域名所有权
-acme.sh --issue -d shenshuxin.tpddns.cn --nginx /usr/local/nginx/conf/nginx.conf
+acme.sh --set-default-ca --server letsencrypt
 
-# 下发证书 安装 证书
-acme.sh --install-cert -d example.com \
---key-file       /path/to/keyfile/in/nginx/key.pem  \
---fullchain-file /path/to/fullchain/nginx/cert.pem \
---reloadcmd     "service nginx force-reload"
+# 使用acme.sh认证域名所有权 
+acme.sh --force --issue --dns dns_ali -d shenshuxin.cn -d '*.shenshuxin.cn' --yes-I-know-dns-manual-mode-enough-go-ahead-please
+
+# 生成密钥文件
+
+acme.sh --install-cert -d  shenshuxin.cn  \
+--key-file       ~/apps/subacme/key.pem  \
+--fullchain-file ~/apps/subacme/cert.pem 
+
+
+# nginx配置
+listen 443 ssl;
+server_name www.shenshuxin.cn;
+ssl_certificate /home/ssx/apps/subacme/cert.pem ;
+ssl_certificate_key /home/ssx/apps/subacme/key.pem;
+
+# 如果是k8s部署的话，需要重新配置密文
+1. Secret: ssx / tls-sub-shenshuxin-cn-secert
+2. Secret: istio-system / acme-sub-name-shenshuxin.cn
 ```
+
 ## 4. 遇到的问题
 1. 因为我的ip不支持80、443端口访问，所以验证整数的时候不行，因为验证证书仅仅支持80端口
 2. 验证域名的所有权可以http方式可以dns方式，因为http我没有80端口号，但是dns方式我的域名是腾达路由器的免费二级域名，也不支持dns添加txt。所以不能进行域名所有权验证。
 3. 解决方案可以给宽带客服打电话开通80端口访问 或者使用花生壳域名支持添加dns的txt
 
-## 购买阿里云域名，然后通过dns解析认证并注册域名
-[参考网址](https://blog.csdn.net/yedajiang44/article/details/121173526)
-
-1. 购买网址： https://home.console.aliyun.com/home/dashboard/ProductAndService
-2. 设置dns解析为自己的公网ip
-  - 新增阿里访问控制配置权限并且添加到本地环境变量
-    export Ali_Key="xxx"
-    export Ali_Secret="xxxxx"
-
-3. 使用acme.sh认证域名所有权 
-`acme.sh --force --issue --dns dns_ali -d shenshuxin.cn -d *.shenshuxin.cn --yes-I-know-dns-manual-mode-enough-go-ahead-please`
-
-4. 生成密钥文件
-```sh
-acme.sh --install-cert -d  shenshuxin.cn  \
---key-file       /home/ssx/apps/subacme/key.pem  \
---fullchain-file /home/ssx/apps/subacme/cert.pem 
-```
-
-7. nginx配置
-```sh
-listen 443 ssl;
-server_name www.shenshuxin.cn;
-ssl_certificate /home/ssx/apps/subacme/cert.pem ;
-ssl_certificate_key /home/ssx/apps/subacme/key.pem;
-```
 ---
 
 # nginx功能
