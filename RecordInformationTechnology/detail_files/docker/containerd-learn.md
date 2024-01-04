@@ -30,3 +30,45 @@ buildctl build \
 	--local dockerfile=. \
 	--output type=image,name=ssx.docker.io/jdk:21
 ```
+
+
+# containerd配置
+```sh
+# cat /etc/containerd/config.toml
+version = 2
+root = "/var/lib/containerd"
+state = "/home/ctr/run/containerd"
+oom_score = 0
+
+[grpc]
+  max_recv_message_size = 16777216
+  max_send_message_size = 16777216
+
+[debug]
+  level = "info"
+
+[metrics]
+  address = ""
+  grpc_histogram = false
+
+[plugins]
+  [plugins."io.containerd.grpc.v1.cri"]
+    sandbox_image = "registry.aliyuncs.com/k8sxio/pause:3.6"
+    max_container_log_line_size = -1
+    [plugins."io.containerd.grpc.v1.cri".containerd]
+      default_runtime_name = "runc"
+      snapshotter = "overlayfs"
+      [plugins."io.containerd.grpc.v1.cri".containerd.runtimes]
+        [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+          runtime_type = "io.containerd.runc.v2"
+          runtime_engine = ""
+          runtime_root = ""
+          [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+            systemdCgroup = true
+    [plugins."io.containerd.grpc.v1.cri".registry]
+      [plugins."io.containerd.grpc.v1.cri".registry.mirrors]
+        [plugins."io.containerd.grpc.v1.cri".registry.mirrors."docker.io"]
+          endpoint = ["https://bqr1dr1n.mirror.aliyuncs.com"]
+        [plugins."io.containerd.grpc.v1.cri".registry.mirrors."k8s.gcr.io"]
+          endpoint = ["https://registry.aliyuncs.com/k8sxio"]
+```
