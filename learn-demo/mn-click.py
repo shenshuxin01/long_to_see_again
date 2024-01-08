@@ -14,9 +14,9 @@ def m(x,y,t):
     pyautogui.moveTo(x, y,t)
 
     # 模拟鼠标单击事件
-    pyautogui.click()
+    #pyautogui.click()
 
-    time.sleep(2)
+    time.sleep(8)
 
 while True:
     print("移动到【上】")
