@@ -37,7 +37,7 @@ buildctl build \
 # cat /etc/containerd/config.toml
 version = 2
 root = "/var/lib/containerd"
-state = "/home/ctr/run/containerd"
+state = "/run/containerd"
 oom_score = 0
 
 [grpc]
