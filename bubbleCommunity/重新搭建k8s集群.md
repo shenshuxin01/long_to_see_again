@@ -59,3 +59,16 @@ kubectl create -n ssx secret tls ssx-istio-grpc-springboot-secret \
   --key=./key.pem \
   --cert=./cert.pem
 ```
+
+7. 安装kubernetes-dashboard
+```sh
+#同级文件 
+kubectl apply -f ./dashboard.yml
+#生成证书
+kubectl -n kubernetes-dashboard create secret tls k8sdashboard-ssx --key ./key.pem --cert ./cert.pem
+#获取token
+kubectl -n kubernetes-dashboard create token admin-user
+kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk '{print $1}')
+#打开 k8s.shenshuxin.cn网站
+curl https://k8s.shenshuxin.cn:30444/
+```
