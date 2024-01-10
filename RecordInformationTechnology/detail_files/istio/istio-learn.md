@@ -291,8 +291,8 @@ data:
     extensionProviders:
     - name: "sample-ext-authz-http"
       envoyExtAuthzHttp:
-        service: "ssx-java-web-sv.ssx.svc.cluster.local"
-        port: "9001"
+        service: "ssx-istio-grpc-springboot-dmsv.ssx.svc.cluster.local"
+        port: "8080"
         includeRequestHeadersInCheck: ["Authorization","whoFlag","Cookie","x-envoy-external-address"]
 
 curl -I -H "Authorization: aaa" -H "whoFlag: aaa" "http://ssx-java-web-sv.ssx.svc.cluster.local:9001/sssssss" 
