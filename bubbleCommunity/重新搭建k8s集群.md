@@ -66,7 +66,20 @@ kubectl create -n ssx secret tls ssx-istio-grpc-springboot-secret \
 kubectl apply -f ./dashboard.yml
 #生成证书
 kubectl -n kubernetes-dashboard create secret tls k8sdashboard-ssx --key ./key.pem --cert ./cert.pem
-#获取token
+#生成永久的token
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: Secret
+metadata:
+  name: admin-user-robot-secret
+  namespace: kubernetes-dashboard
+  annotations:
+    kubernetes.io/service-account.name: admin-user
+type: kubernetes.io/service-account-token
+EOF
+#获取永久token
+kubectl describe -n kubernetes-dashboard secrets/admin-user-robot-secret
+#生成临时token一小时
 kubectl -n kubernetes-dashboard create token admin-user
 kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk '{print $1}')
 #打开 k8s.shenshuxin.cn网站
