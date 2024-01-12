@@ -336,7 +336,7 @@ EOF
 
 ## 验证istio外部授权
 ```sh
-#未开启授权 curl -I "http://web-base.ssx:8083/test1?name=fffppp"
+#未开启授权 curl -I "http://ssx-istio-grpc-springboot-dmsv.ssx.svc.cluster.local:8083/test1?name=fffppp"
 HTTP/1.1 200 OK
 content-type: text/plain;charset=UTF-8
 content-length: 14

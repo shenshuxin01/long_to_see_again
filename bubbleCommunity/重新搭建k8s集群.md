@@ -17,11 +17,7 @@ rm -rf /etc/cni
 rm -rf /opt/cni
 rm -rf /var/lib/etcd
 rm -rf /var/etcd
-kubectl delete serviceaccount kuboard-admin -n kuboard
-kubectl delete serviceaccount kuboard-viewer -n kuboard
-kubectl delete clusterrolebinding kuboard-admin-crb
-kubectl delete clusterrolebinding kuboard-viewer-crb
-kubectl delete namespace kuboard
+
 ```
 3. 使用kuboard安装kubernetes
 https://kuboard.cn/install/install-k8s.html
