@@ -6,3 +6,16 @@
 # git
 1. git删除remote origin
 git remote rm origin
+
+# github 连接ssh超时
+在.ssh目录下新增文件
+```sh
+Host github.com
+User git
+Hostname ssh.github.com
+PreferredAuthentications publickey
+IdentityFile ~/.ssh/id_rsa
+Port 443
+```
+然后 ssh -T git@github.com
+S
