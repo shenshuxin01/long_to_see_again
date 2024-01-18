@@ -6,3 +6,11 @@
 # git
 1. git删除remote origin
 git remote rm origin
+
+# cat .ssh/config
+Host github.com
+User git
+Hostname ssh.github.com
+PreferredAuthentications publickey
+IdentityFile ~/.ssh/id_rsa
+Port 443
