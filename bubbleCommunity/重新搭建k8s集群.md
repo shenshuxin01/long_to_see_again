@@ -90,45 +90,11 @@ kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboar
 curl https://k8s.shenshuxin.cn:30444/
 ```
 
-# 配置看图历史记录
-```yaml
-
-apiVersion: networking.istio.io/v1alpha3
-kind: Gateway
-metadata:
-  name: ssx-istio-tpddns-gw
-  namespace: ssx
-spec:
-  selector:
-    istio: ingressgateway
-  servers:
-    - port:
-        number: 80
-        name: http
-        protocol: HTTP
-      hosts:
-        - "shenshuxin.tpddns.cn"
-
----
-apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
-metadata:
-  name: ssx-istio-tpddns-gwvs
-  namespace: ssx
-spec:
-  hosts:
-    - "shenshuxin.tpddns.cn"
-  gateways:
-    - ssx-istio-tpddns-gw
-  http:
-    - route:
-        - destination:
-            host: ssx-nginx-dmsv.ssx.svc.cluster.local
-            port:
-              number: 90
-      match:
-        - uri:
-            prefix: "/"
-          ignoreUriCase: false
-
+8. 配置ingress-nginx错误页面 默认后端服务
+```sh
+# 配置ingress-nginx-controller的Deployment命令行启动新增参数，这个服务名字是我的oauth2服务8080端
+containers.args = '--default-backend-service=ssx/ssx-istio-grpc-springboot-dmsv'
+# 配置namespace: ingress-nginx的ConfigMap新增值
+custom-http-errors: '403,401'
 ```
+

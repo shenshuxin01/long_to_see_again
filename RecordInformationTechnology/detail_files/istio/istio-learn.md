@@ -408,3 +408,36 @@ spec:
         mode: SIMPLE
 
 ```
+
+# istio跨域配置
+```yaml
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: ssx-istio-grpc-springboot-gwvs-base
+  namespace: ssx
+spec:
+  hosts:
+    - "shenshuxin.tpddns.cn"
+  gateways:
+    - ssx-tpddns-gw
+  http:
+    - route:
+        - destination:
+            host: xx
+            port:
+              number: 8080
+      match:
+        - uri:
+            prefix: "/spring-boot-oauth2-client/"
+      corsPolicy:
+        allowHeaders:
+          - authorization
+          - content-type
+        allowMethods:
+          - POST
+          - OPTIONS
+          - GET
+        allowOrigin:
+          - http://shenshuxin.tpddns.cn:30010
+```
