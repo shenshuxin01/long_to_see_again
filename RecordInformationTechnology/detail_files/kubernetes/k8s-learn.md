@@ -217,5 +217,15 @@ containers.args = '--default-backend-service=ssx/ssx-istio-grpc-springboot-dmsv'
 custom-http-errors: '403,401'
 ```
 
+# etcd
+```sh
+export ETCDCTL_API=3
 
+alias etcdctl='etcdctl --endpoints=https://192.168.0.101:2379,https://192.168.0.102:2379,https://192.168.0.109:2379 --cacert=/etc/ssl/etcd/ssl/ca.pem --cert=/etc/ssl/etcd/ssl/admin-node101.pem --key=/etc/ssl/etcd/ssl/admin-node101-key.pem'
 
+etcdctl member list
+
+etcdctl endpoint status --write-out=table
+
+etcdctl endpoint health
+```
