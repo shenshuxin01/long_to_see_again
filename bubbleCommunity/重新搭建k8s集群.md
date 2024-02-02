@@ -96,5 +96,47 @@ curl https://k8s.shenshuxin.cn:30444/
 containers.args = '--default-backend-service=ssx/ssx-istio-grpc-springboot-dmsv'
 # 配置namespace: ingress-nginx的ConfigMap新增值
 custom-http-errors: '403,401'
-```
+=========
+# 配置看图历史记录
+```yaml
 
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: ssx-istio-tpddns-gw
+  namespace: ssx
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      hosts:
+        - "shenshuxin.tpddns.cn"
+
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: ssx-istio-tpddns-gwvs
+  namespace: ssx
+spec:
+  hosts:
+    - "shenshuxin.tpddns.cn"
+  gateways:
+    - ssx-istio-tpddns-gw
+  http:
+    - route:
+        - destination:
+            host: ssx-nginx-dmsv.ssx.svc.cluster.local
+            port:
+              number: 90
+      match:
+        - uri:
+            prefix: "/"
+          ignoreUriCase: false
+
+>>>>>>>>> Temporary merge branch 2
+```
