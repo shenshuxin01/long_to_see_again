@@ -22,5 +22,8 @@ npm list -g --depth 0
 # 删除本地包
 npm uninstall -g xxx
 
+# 修改nodejs运行内存
+setx NODE_OPTIONS --max_old_space_size=4096
+
 ```
 
