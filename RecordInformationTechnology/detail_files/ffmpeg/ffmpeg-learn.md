@@ -125,3 +125,6 @@ EXT-X-PLAYLIST-TYPE 字段是用来播放列表的类型信息。书写格式如
 
 #EXT-X-ENDLIST
 ```
+
+# ffplay使用
+远程执行添加变量 export DISPLAY=:0
