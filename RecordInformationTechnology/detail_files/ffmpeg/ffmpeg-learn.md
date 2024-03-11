@@ -125,3 +125,9 @@ EXT-X-PLAYLIST-TYPE 字段是用来播放列表的类型信息。书写格式如
 
 #EXT-X-ENDLIST
 ```
+
+# ffplay使用
+远程执行添加变量 export DISPLAY=:0
+
+# ffmpeg切片视频
+ffmpeg -i ~/index.mp4 -c:v h264 -flags +cgop -g 30 -hls_time 5 -hls_list_size 0 -hls_segment_filename index%3d.ts index.m3u8
