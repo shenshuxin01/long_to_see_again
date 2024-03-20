@@ -76,6 +76,7 @@ acme.sh --set-default-ca --server letsencrypt
 acme.sh --force --issue --dns dns_ali -d shenshuxin.cn -d '*.shenshuxin.cn' --yes-I-know-dns-manual-mode-enough-go-ahead-please
 
 # 生成密钥文件
+mkdir -p ~/apps/subacme
 
 acme.sh --install-cert -d  shenshuxin.cn  \
 --key-file       ~/apps/subacme/key.pem  \
