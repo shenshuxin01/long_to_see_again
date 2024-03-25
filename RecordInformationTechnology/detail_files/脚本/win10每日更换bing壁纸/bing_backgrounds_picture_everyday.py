@@ -67,7 +67,6 @@ def set_bing_backgrounds():
 # 查看后台运行的进程 tasklist /v | findstr bing_backgrounds_picture_everyday
 if __name__ == '__main__':
     kill_early_pid()
-    last_date = ''
     pid = os.getpid()
     logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(filename)s %(levelname)s %(message)s',
@@ -81,11 +80,6 @@ if __name__ == '__main__':
     logging.info('py运行的pid信息：'+str(pid))
 
     while True:
-        cur_date = get_current_time('%Y%m%d')
-        logging.info('当前时间：'+cur_date)
-        if last_date != cur_date:
-        #if True:
-            logging.info("批处理替换每日bing壁纸开始执行：" + last_date)
-            last_date = cur_date
-            set_bing_backgrounds()
-        time.sleep(100)
+        logging.info("批处理替换每日bing壁纸开始执行")
+        set_bing_backgrounds()
+        time.sleep(300)
