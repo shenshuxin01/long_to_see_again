@@ -10,15 +10,21 @@ print(h)
 
 
 def m(x,y,t):
+
+    pyautogui.middleClick(duration=1.0)
+    pyautogui.keyDown("win")
+    pyautogui.keyUp("win")
     # 鼠标移动到屏幕中央
     pyautogui.moveTo(x, y,t)
 
     # 模拟鼠标单击事件
     #pyautogui.click()
-
-    time.sleep(8)
+    pyautogui.keyDown("win")
+    pyautogui.keyUp("win")
+    time.sleep(340)
 
 while True:
+    print(time.localtime())
     print("移动到【上】")
     m(w/2,h/3,3)
     print("移动到【右】")
