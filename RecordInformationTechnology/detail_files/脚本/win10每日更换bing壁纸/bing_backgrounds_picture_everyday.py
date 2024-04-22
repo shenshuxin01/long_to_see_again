@@ -83,6 +83,6 @@ if __name__ == '__main__':
         try:
             logging.info("批处理替换每日bing壁纸开始执行")
             set_bing_backgrounds()
-            time.sleep(300)
+            time.sleep(3000)
         except Exception as e:
             logging.exception("执行失败，重新执行任务",e)
