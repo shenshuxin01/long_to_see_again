@@ -48,7 +48,7 @@ def set_bing_backgrounds():
     title = (r.json()['images'][0]['title'])
     final_url = 'https://cn.bing.com' + suffix_url
     logging.info("获取图片url信息：" + final_url)
-    cur_time = get_current_time('%Y%m%d%H%M%S') + "_"
+    cur_time = get_current_time('%Y%m%d') + "_"
     pic = requests.get(final_url)
     while pic.status_code != 200:
         pic = requests.get(final_url)
@@ -78,8 +78,11 @@ if __name__ == '__main__':
     logging.info('程序开始执行！')
     logging.info('程序s开始执行！')
     logging.info('py运行的pid信息：'+str(pid))
-
+    
     while True:
-        logging.info("批处理替换每日bing壁纸开始执行")
-        set_bing_backgrounds()
-        time.sleep(300)
+        try:
+            logging.info("批处理替换每日bing壁纸开始执行")
+            set_bing_backgrounds()
+            time.sleep(300)
+        except Exception as e:
+            logging.exception("执行失败，重新执行任务",e)
