@@ -21,7 +21,7 @@ def m(x,y,t):
     #pyautogui.click()
     pyautogui.keyDown("win")
     pyautogui.keyUp("win")
-    time.sleep(340)
+    time.sleep(200)
 
 while True:
     print(time.localtime())
