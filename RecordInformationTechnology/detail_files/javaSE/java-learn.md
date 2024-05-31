@@ -206,3 +206,5 @@ equals方法目的是为了判断两个对象是否相等；hashCode方法是为
 ![1686119711454](image/java-learn/1686119711454.png)
 ![1686119671519](image/java-learn/1686119671519.png)
 
+# BUG
+hutool工具类的FileUtil.touch()方法报NotFundFile，可能是没权限访问路径
