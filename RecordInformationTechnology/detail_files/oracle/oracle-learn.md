@@ -41,3 +41,8 @@ select substring_index('a6b6c6','6',2)
 
 # mysql字符互转日期
 `select date_format(now(), '%Y-%m-%d---%H-%i-%s'),STR_TO_DATE('09-13-1999','%m-%d-%Y')`
+
+# mysql5.7密码过期重置
+mysql -u root -p
+
+set password = password('1');
