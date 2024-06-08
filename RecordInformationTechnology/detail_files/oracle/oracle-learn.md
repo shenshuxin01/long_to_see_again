@@ -45,4 +45,4 @@ select substring_index('a6b6c6','6',2)
 # mysql5.7密码过期重置
 mysql -u root -p
 
-set password = password('1');
+set password = password('XXXXX');
