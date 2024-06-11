@@ -1,12 +1,16 @@
 # !/usr/bin/python
 # -*- coding: UTF-8 -*-
 
+import random
+import shutil
 import requests, time
 import os,re
 import logging
 
 g_path = 'D:\\appdata\\bing_backgrounds\\'
 pid_path = 'D:\\'
+g_local_pic = "C:\\Users\\shenshuxin\\Pictures"
+CHANGE_MODE_LOCALFILE = True
 
 # 把旧图片移动 或者 删除 或者什么都不做
 def del_file():
@@ -36,8 +40,7 @@ def kill_early_pid():
             #删除文件
             os.remove(pid_path+searchObj.group(0))
 
-
-def set_bing_backgrounds():
+def get_bing_net():
     logging.info('这是ssx python文件执行的,配合win10壁纸选择文件夹')
     r = requests.get("https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=zh-CN")
     while r.status_code!=200:
@@ -64,6 +67,19 @@ def set_bing_backgrounds():
         f.write(pic_context)
     logging.info("下载图片完成：" + path)
 
+
+def set_bing_backgrounds():
+    global CHANGE_MODE_LOCALFILE
+    if CHANGE_MODE_LOCALFILE:
+        pic_list = os.listdir(g_local_pic)
+        # 随机获取一张图片
+        local_one_pic = g_local_pic + '\\' + random.choice(pic_list)
+        del_file()
+        shutil.move(local_one_pic,g_path)    # 移动文件（目录）
+    else:
+        get_bing_net()
+    CHANGE_MODE_LOCALFILE = not(CHANGE_MODE_LOCALFILE)
+
 # 查看后台运行的进程 tasklist /v | findstr bing_backgrounds_picture_everyday
 if __name__ == '__main__':
     kill_early_pid()
@@ -83,6 +99,6 @@ if __name__ == '__main__':
         try:
             logging.info("批处理替换每日bing壁纸开始执行")
             set_bing_backgrounds()
-            time.sleep(3000)
+            time.sleep(70)
         except Exception as e:
             logging.exception("执行失败，重新执行任务",e)
